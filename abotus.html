@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Argiculture Webflow</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="icon" type="image/png" href="assets/images/logo.svg" />
+    <link rel="stylesheet" href="assets/css/aboutus.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    
+  </head>
+
+  <body>
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <button class="modal-close" id="modalClose">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 class="modal-title" id="modalTitle">Sign In</h2>
+        <p class="modal-subtitle">Welcome to Organick Store</p>
+        <div class="modal-field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="Enter your email" />
+        </div>
+        <div class="modal-field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <a href="index.html">
+          <button class="modal-btn">Sign In</button>
+        </a>
+      </div>
+    </div>
+
+    <header class="main-header">
+      <nav class="navbar content-wrap d-flex">
+        <div class="navbar-content d-flex">
+          <div class="logo d-flex">
+            <img src="assets/images/logo.svg" alt="Organick " />
+            <span>Organick</span>
+          </div>
+          <button id="iconBlock" class="menu-icon">
+            <div id="iconOpen" class="menu-icon-open">
+              <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </div>
+            <div id="iconClose" class="menu-icon-close d-none">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </div>
+          </button>
+          <ul id="mainMenu" class="main-menu d-flex">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li>
+              <a href="#"
+                >Pages
+                <img
+                  class="icon-page"
+                  src="assets/images/icons/arrow.svg"
+                  alt=""
+              /></a>
+            </li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">News</a></li>
+          </ul>
+
+          <div class="top-panel">
+            <div class="search-box">
+              <button class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <div class="cart-box">
+              <div class="cart-icon">
+                <i class="fa-solid fa-shopping-cart"></i>
+              </div>
+              <span>Cart (0)</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="image content-wrap d-flex">
+        <img src = "assets/images/aboutus/about-us.png" alt = "">
+        <h1>About Us</h1>
+      </div>
+      <script src="assets/js/aboutus.js"></script>
+      </header>
+     </body>
+     </html> 
