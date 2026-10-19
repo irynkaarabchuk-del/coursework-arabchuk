@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+  overflow-x: clip;
+}
 .image {
   position: relative;
   width: 100%;
@@ -7,7 +11,6 @@
 .image img {
   display: block;
   width: 100%;
-  height: 120px;
   object-fit: cover;
 }
 
@@ -24,22 +27,107 @@
   white-space: nowrap;
 }
 
-@media (min-width: 768px) {
-  .image img {
-    height: 180px;
-  }
-
-  .image h1 {
-    font-size: 32px;
-  }
+.about {
+  background-color: #fff;
+}
+.about-visual {
+  position: relative;
+  
 }
 
-@media (min-width: 1200px) {
-  .image img {
-    height: auto;
+.about-visual .about-image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+.about-page .list {
+  flex-direction: column;
+  gap: 20px;
+}
+.deco-tomatoes {
+  display: none;
+}
+.about-text {
+  padding-top: 7px;
+  padding-bottom:7px;
+}
+
+.list {
+  padding-top:20px;
+}
+.about-page .about-visual .about-image {
+  transform: translateX(-10%);
+}
+@media (min-width: 768px) {
+  .about {
+    padding-bottom: 60px;
   }
 
-  .image h1 {
-    font-size: 40px;
+  .about-visual {
+    width: 50%;
+
+  }
+.text .about-heading {
+  text-align: left;
+}
+  .deco-tomatoes {
+    display: block;
+    position: absolute;
+    left: -2%;
+    bottom: -10%;
+    width: 45%;
+    z-index: 0;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .about-page .list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .about-page .feature-item {
+    flex: 1 1 220px;
+    align-items: center;
+    padding-bottom: 0;
+  }
+
+  .about-page .feature-text h3 {
+    font-size: 18px;
+    margin-bottom: 0;
+    color: var(--dark-color);
+  }
+  .about-page .about-visual .about-image {
+    transform: none;
+  }
+
+}
+.about-page .shop .arrow-icon {
+  transform: rotate(0deg);
+}
+.list{
+  padding-bottom: 40px;
+}
+.about-page .information-about {
+  align-items: flex-start;
+}
+@media (min-width: 1200px) {
+  .about {
+    padding-bottom: 160px;
+  }
+ .about-page {
+    margin-top: 0;
+    padding-top: 95px;
+  }
+
+  .about-page .feature-item {
+    gap: 8px;
+  }
+  .deco-tomatoes {
+    left: -2%;
+    bottom: -10%;
+    width: 45%;
   }
 }
