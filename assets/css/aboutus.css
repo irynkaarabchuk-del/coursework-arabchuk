@@ -173,7 +173,82 @@ body {
   color: #525c60;
   line-height: 1.6;
 }
+.text {
+    color: var(--secondary-color);
+    font-family: var(--accent-font);
+    font-size: 30px;
+    justify-content: center;
+}
+.our-team {
+  flex-direction: column;
+  align-items: center;
 
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.card-team {
+  background-color: #F9F8F8;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 27px;
+}
+.card-team img {
+  width: 100%;
+  display: block;
+}
+
+.card-team .name {
+  font-size: 22px;
+  padding: 20px 18px 0;
+}
+.card-team .specialisation {
+  font-size: 20px;
+  display: block; 
+  padding: 0 18px 20px;
+}.card-text {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  padding: 20px 18px;
+}
+
+.card-text .name {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.card-text .specialisation {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.card-text .socials {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;   /* замість center / end */
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  line-height: 1; 
+}
+
+.card-text .socials a {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--dark-color);
+  display: flex;       /* щоб іконка не мала висоти рядка тексту */
+  line-height: 1;
+}
 @media (min-width: 768px) {
   .about {
     padding-bottom: 60px;
@@ -277,6 +352,7 @@ body {
 
   .why-cards-section {
     padding-top: 20px;
+    padding-bottom: 185px;
   }
 
   .why-cards.products {
@@ -288,5 +364,24 @@ body {
 .why-card .feature-icon::before {
     top: 25px;
     right: 30px;
+  }
+  .team {
+    margin-top: 177px;
+    margin-bottom: 202px;
+  }
+.team-words {
+  width: 800px;
+  margin-top: 16px;
+  margin-bottom: 27px;
+}
+    .card {
+    flex-direction: row;
+    gap: 27px;
+    
+  }
+
+  .card-team {
+    flex: 1;
+    
   }
 }
