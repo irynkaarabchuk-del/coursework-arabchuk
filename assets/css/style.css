@@ -390,8 +390,12 @@ h2 {
 }
 .shop {
   background-color: var(--dark-color);
-  width: 150px;
+  width: auto;
+  min-width: 150px;
   height: 50px;
+  padding: 0 24px;
+  gap: 8px;
+  white-space: nowrap;
   border: none;
   border-radius: 16px;
   color: #fff;
@@ -402,7 +406,7 @@ h2 {
 .shop .new-shop {
   color: #fff;
   font-size: 20px;
-  padding-right: 5px;
+  padding-right: 0;
 }
 
 .shop .fa-solid {
@@ -1176,8 +1180,8 @@ footer {
 /* ── ДЕСКТОП ── */
 @media (min-width: 768px) {
   .search-box {
-    width: 376px;
-    height: 66px;
+    width: 300px;
+    height: 56px;
     background: #fafafa;
     border-radius: 36px;
     padding: 6px 6px 6px 16px;
@@ -1192,8 +1196,8 @@ footer {
   }
 
   .cart-box {
-    width: 159px;
-    height: 66px;
+    width: 149px;
+    height: 56px;
     gap: 10px;
     border: 1px solid #d0d0d0;
     border-radius: 36px;
@@ -1209,8 +1213,8 @@ footer {
   }
   .search-btn,
   .cart-icon {
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
   }
   .fa-bars,
   .fa-xmark {
@@ -1840,4 +1844,20 @@ footer {
 
 .products-section.animate {
   transition: opacity 0.3s ease, transform 0.3s ease;
+}
+@media (min-width: 1366px) {
+  .main-menu {
+    width: auto;
+    flex: 1;
+    font-size: 1.5em;
+  }
+
+  .main-menu li a {
+    white-space: nowrap;
+    margin-right: 14px;
+  }
+
+  .search-box {
+    width: 260px;
+  }
 }
