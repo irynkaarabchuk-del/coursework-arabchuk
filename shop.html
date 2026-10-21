@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Магазин — Organick</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/aboutus.css" />
+    <link rel="stylesheet" href="assets/css/shop.css" />
+  </head>
+
+  <body>
+    <!-- Модальне вікно входу -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 class="modal-title" id="modalTitle">Увійти</h2>
+        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
+
+        <div class="modal-field">
+          <label for="email">Електронна пошта</label>
+          <input id="email" type="email" placeholder="Введіть вашу пошту" />
+        </div>
+        <div class="modal-field">
+          <label for="password">Пароль</label>
+          <input id="password" type="password" placeholder="Введіть ваш пароль" />
+        </div>
+
+        <a href="index.html" class="modal-btn">Увійти</a>
+      </div>
+    </div>
+
+    <header class="main-header">
+      <nav class="navbar content-wrap d-flex">
+        <div class="navbar-content d-flex">
+          <a href="index.html" class="logo d-flex">
+            <img src="assets/images/logo.svg" alt="Organick" />
+            <span>Organick</span>
+          </a>
+
+          <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню">
+            <div id="iconOpen" class="menu-icon-open">
+              <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </div>
+            <div id="iconClose" class="menu-icon-close d-none">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </div>
+          </button>
+
+          <ul id="mainMenu" class="main-menu d-flex">
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="abotus.html">Про нас</a></li>
+            <li>
+              <a href="#">
+                Сторінки
+                <img class="icon-page" src="assets/images/icons/arrow.svg" alt="" />
+              </a>
+            </li>
+            <li><a href="shop.html">Магазин</a></li>
+            <li><a href="#">Проєкти</a></li>
+            <li><a href="#">Новини</a></li>
+          </ul>
+
+          <div class="top-panel">
+            <div class="search-box">
+              <button type="button" class="search-btn" aria-label="Пошук">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <div class="cart-box">
+              <div class="cart-icon">
+                <i class="fa-solid fa-shopping-cart"></i>
+              </div>
+              <span>Кошик (0)</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="shop-banner image d-flex">
+        <img src="assets/images/shop/shop.png" alt="" />
+        <h1 class="subtitle">Магазин</h1>
+      </div>
+    </header>
+
+    <main>
+      <section class="shop-products">
+        <div class="products">
+          <!-- Ряд 1 -->
+          <article class="product-card">
+            <span class="badge d-flex">Овочі</span>
+            <img src="assets/images/brocoli1.png" alt="Броколі калабрезе" />
+            <div class="product-info">
+              <h3>Броколі калабрезе</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$13.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Свіже</span>
+            <img src="assets/images/bananes.png" alt="Свіжі банани" />
+            <div class="product-info">
+              <h3>Свіжі банани</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$14.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Крупи</span>
+            <img src="assets/images/nuts.png" alt="Білі горіхи" />
+            <div class="product-info">
+              <h3>Білі горіхи</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$15.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Овочі</span>
+            <img src="assets/images/tomato.png" alt="Веганський червоний томат" />
+            <div class="product-info">
+              <h3>Веганський червоний томат</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$17.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ряд 2 -->
+          <article class="product-card">
+            <span class="badge">Здоровʼя</span>
+            <img src="assets/images/bean.png" alt="Боби мунг" />
+            <div class="product-info">
+              <h3>Боби мунг</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$11.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Горіхи</span>
+            <img src="assets/images/hazelnut.png" alt="Коричневий фундук" />
+            <div class="product-info">
+              <h3>Коричневий фундук</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$12.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Свіже</span>
+            <img src="assets/images/agges.png" alt="Яйця" />
+            <div class="product-info">
+              <h3>Яйця</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$17.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Свіже</span>
+            <img src="assets/images/bread.png" alt="Сухарики Zelco Suji Elaichi" />
+            <div class="product-info">
+              <h3>Сухарики Zelco Suji Elaichi</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$15.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ряд 3 (4 нові картинки) -->
+          <article class="product-card">
+            <span class="badge">Здоровʼя</span>
+            <img src="assets/images/shop/bean.png" alt="Цукіні" />
+            <div class="product-info">
+              <h3>Цукіні</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$11.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Горіхи</span>
+            <img src="assets/images/shop/hazelnut.png" alt="Горіхи кеш'ю" />
+            <div class="product-info">
+              <h3>Горіхи кеш'ю</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$12.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Свіже</span>
+            <img src="assets/images/shop/corn.png" alt="Свіжа кукурудза" />
+            <div class="product-info">
+              <h3>Свіжа кукурудза</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$17.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <span class="badge">Горіхи</span>
+            <img src="assets/images/shop/almonds.png" alt="Органічний мигдаль" />
+            <div class="product-info">
+              <h3>Органічний мигдаль</h3>
+              <div class="product-bottom">
+                <div class="prices">
+                  <span class="old-price">$20.00</span>
+                  <span class="new-price">$15.00</span>
+                </div>
+                <div class="rating">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="newsletter d-flex">
+        <img src="assets/images/orange.jpg" alt="апельсин" />
+        <div class="newsletter-text">
+          <h2>Підпишіться на нашу розсилку</h2>
+        </div>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Ваша електронна адреса" />
+          <button type="button">Підписатися</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content d-flex">
+        <div class="footer-contact">
+          <h3>Звʼяжіться з нами</h3>
+          <p><strong>Електронна пошта</strong></p>
+          <p>needhelp@Organia.com</p>
+          <p><strong>Телефон</strong></p>
+          <p>666 888 888</p>
+          <p><strong>Адреса</strong></p>
+          <p>США, вул. Борклін, 88</p>
+        </div>
+
+        <div class="footer-center">
+          <div class="footer-logo">
+            <img src="assets/images/logo.svg" alt="Логотип Organick" />
+            <span>Organick</span>
+          </div>
+          <p>
+            Свіжі органічні продукти від перевірених фермерів із доставкою до
+            вашого дому.
+          </p>
+          <div class="footer-socials">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Службові сторінки</h3>
+          <ul>
+            <li>Посібник зі стилю</li>
+            <li>404 Сторінку не знайдено</li>
+            <li>Захищено паролем</li>
+            <li>Ліцензії</li>
+            <li>Журнал змін</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          Авторське право © <strong>Organick</strong> | Дизайн:
+          <strong>VictorFlow</strong> Templates - на платформі
+          <strong>Webflow</strong>
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
