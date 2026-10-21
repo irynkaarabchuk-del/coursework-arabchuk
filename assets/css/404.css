@@ -1,0 +1,113 @@
+
+.error-page {
+  background-color: #c3d2d3;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-code {
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 1;
+  color: #8FA8A8;
+}
+
+.error-title {
+  padding: 0;
+  font-size: 32px;
+  font-weight: 800;
+  justify-content: center;
+}
+
+.error-text {
+  font-family: var(--secondary-font);
+  font-size: 15px;
+  color: #525c60;
+  margin: 12px 0 28px;
+  max-width: 320px;
+}
+
+.error-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 60px;
+  padding: 0 28px;
+  border-radius: 12px;
+  background: var(--dark-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.error-btn .arrow-icon {
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .error-page {
+    min-height: 600px;
+  }
+
+  .error-code {
+    font-size: 200px;
+  }
+
+  .error-title {
+    font-size: 44px;
+  }
+
+  .error-text {
+    font-size: 16px;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .error-page {
+    background-image: url("../images/eror/404.png");
+    background-size: cover;
+    background-position: left center;
+    background-repeat: no-repeat;
+
+    aspect-ratio: 2.15 / 1; 
+    min-height: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: 58% 1fr; 
+    align-items: center;
+    text-align: left;
+  }
+
+  .error-content {
+    grid-column: 2;
+    align-items: flex-start;
+    padding-right: 40px;
+  }
+
+  .error-code {
+    font-size: clamp(140px, 13vw, 250px);
+  }
+
+  .error-title {
+    font-size: clamp(34px, 3.4vw, 50px);
+    justify-content: flex-start;
+  }
+
+  .error-text {
+    font-size: 16px;
+    max-width: none;
+  }
+}
