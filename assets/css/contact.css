@@ -20,9 +20,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin: 0;
-  font-size: 32px;
-  font-weight: 700;
   color: var(--dark-color);
   text-align: center;
   white-space: nowrap;
@@ -325,7 +322,6 @@
   }
 }
 
-@media (min-width: 1200px) {
  @media (min-width: 1200px) {
   .contact-banner img {
     height: auto;
@@ -361,7 +357,8 @@
   }
 
   .contact-farm img {
-    height: 560px;
+    height: 758px;
+    max-width: 1400px;
   }
 
   .contact-farm-card {
@@ -378,5 +375,4 @@
   .contact-form {
     max-width: 1180px;
   }
-}
 }
