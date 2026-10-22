@@ -190,7 +190,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 449px;
   max-width: 1220px;
   margin: 0 auto;
   padding: 0 20px;
@@ -302,9 +301,27 @@ body {
   border-radius: 12px;
   display: block;
 }
+.category .bcg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
 
-.category img:last-child {
-  width: 200px;
+.category .bcg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.category .category-title {
+  display: block;
+  color: #fff;
 }
 .category-title {
   color: #fff;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Сільське господарство Webflow</title>
+    <title>Organick - свіжі органічні продукти з ферми</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -16,36 +16,13 @@
   </head>
 
   <body>
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal">
-        <button class="modal-close" id="modalClose">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title" id="modalTitle">Увійти</h2>
-        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
-        <div class="modal-field">
-          <label for="email">Електронна пошта</label>
-          <input id="email" type="email" placeholder="Введіть вашу пошту" />
-        </div>
-        <div class="modal-field">
-          <label for="password">Пароль</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Введіть ваш пароль"
-          />
-        </div>
-        <a href="index.html">
-          <button class="modal-btn">Увійти</button>
-        </a>
-      </div>
-    </div>
+  
 
     <header class="main-header">
       <nav class="navbar content-wrap d-flex">
         <div class="navbar-content d-flex">
           <div class="logo d-flex">
-            <img src="assets/images/logo.svg" alt="Organick " />
+            <img src="assets/images/logo.svg" alt="Organick" />
             <span>Organick</span>
           </div>
           <button id="iconBlock" class="menu-icon">
@@ -103,12 +80,12 @@
 
       <div class="banner">
         <div class="banana-banner">
-          <img src="assets/images/banana.png" alt="" />
+          <img src="assets/images/banana.png" alt="Банани" />
           <span class="banana-text">Натуральне!!</span>
           <h2 class="banana-title">Свіжі фрукти прямо з саду</h2>
         </div>
         <div class="apricot-banner">
-          <img src="assets/images/apricot.jpg" alt="" />
+          <img src="assets/images/apricot.jpg" alt="Абрикоси" />
           <span class="apricot-text">Пропозиція!!</span>
           <h2 class="apricot-title">Знижка 10% на овочі</h2>
         </div>
@@ -132,7 +109,7 @@
           <ul class="list d-flex">
             <li class="feature-item">
               <div class="feature-icon">
-                <img src="assets/images/icons/organic-food.svg" alt="" />
+                <img src="assets/images/icons/organic-food.svg" alt="Органічні продукти" />
               </div>
               <div class="feature-text">
                 <h3>Лише органічні продукти</h3>
@@ -144,7 +121,7 @@
             </li>
             <li class="feature-item">
               <div class="feature-icon">
-                <img src="assets/images/icons/quality.svg" alt="" />
+                <img src="assets/images/icons/quality.svg" alt="Стандарти якості" />
               </div>
               <div class="feature-text">
                 <h3>Стандарти якості</h3>
@@ -326,7 +303,7 @@
       </section>
 
       <section class="testimonial">
-        <img class="side" src="assets/images/side.png" alt="" />
+        <img class="side" src="assets/images/side.png" alt="Відгуки" />
         <div class="customer d-flex">
           <span class="subtitle">Відгуки</span>
           <h2 id="testimonial-heading" class="saying">
@@ -340,7 +317,7 @@
             Замовляю в Organick вже пів року. Овочі завжди свіжі, доставка
             швидка, а смак як з бабусиного городу. Дуже рекомендую!
           </blockquote>
-          <p class="name">Sara Taylor</p>
+          <p class="name">Сара Аейлор</p>
           <p class="consumer">Покупець</p>
           <div class="pages d-flex">
             <div class="testimonial-page first"></div>
@@ -349,7 +326,7 @@
           </div>
         </div>
 
-        <section class="stats">
+        <div class="stats">
           <div class="stat-item">
             <span class="stat-number">100%</span>
             <span class="stat-label">Органічні</span>
@@ -366,7 +343,7 @@
             <span class="stat-number">25+</span>
             <span class="stat-label">Років у фермерстві</span>
           </div>
-        </section>
+        </div>
         <img class="side" src="assets/images/side.png" alt="" />
       </section>
 
@@ -573,10 +550,11 @@
         <div class="newsletter-text">
           <h2>Підпишіться на нашу розсилку</h2>
         </div>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Ваша електронна адреса" />
-          <button>Підписатися</button>
-        </div>
+       <form class="newsletter-form" action="#" method="post">
+ 
+  <input id="newsletterEmail" name="email" type="email" placeholder="Ваша електронна адреса" required />
+  <button type="submit">Підписатися</button>
+</form>
       </section>
     </main>
 
@@ -629,6 +607,27 @@
         </p>
       </div>
     </footer>
+    <div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <h2 class="modal-title" id="modalTitle">Увійти</h2>
+    <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
+
+    <form class="modal-form" id="loginForm" action="#" method="post">
+      <div class="modal-field">
+        <label for="email">Електронна пошта</label>
+        <input id="email" name="email" type="email" placeholder="Введіть вашу пошту" autocomplete="email" required />
+      </div>
+      <div class="modal-field">
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" placeholder="Введіть ваш пароль" autocomplete="current-password" minlength="6" required />
+      </div>
+      <button type="submit" class="modal-btn">Увійти</button>
+    </form>
+  </div>
+</div>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

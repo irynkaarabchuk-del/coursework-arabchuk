@@ -17,26 +17,6 @@
   </head>
 
   <body>
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title" id="modalTitle">Увійти</h2>
-        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
-
-        <div class="modal-field">
-          <label for="email">Електронна пошта</label>
-          <input id="email" type="email" placeholder="Введіть вашу пошту" />
-        </div>
-        <div class="modal-field">
-          <label for="password">Пароль</label>
-          <input id="password" type="password" placeholder="Введіть ваш пароль" />
-        </div>
-
-        <a href="index.html" class="modal-btn">Увійти</a>
-      </div>
-    </div>
 
     <header class="main-header">
       <nav class="navbar content-wrap d-flex">
@@ -200,15 +180,16 @@
       </section>
 
       <section class="newsletter d-flex">
-        <img src="assets/images/orange.jpg" alt="апельсин" />
-        <div class="newsletter-text">
-          <h2>Підпишіться на нашу розсилку</h2>
-        </div>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Ваша електронна адреса" />
-          <button type="button">Підписатися</button>
-        </div>
-      </section>
+  <img src="assets/images/orange.jpg" alt="Нарізані апельсини на блакитному фоні" />
+  <div class="newsletter-text">
+    <h2>Підпишіться на нашу розсилку</h2>
+  </div>
+  <form class="newsletter-form" action="#" method="post">
+ 
+  <input id="newsletterEmail" name="email" type="email" placeholder="Ваша електронна адреса" required />
+  <button type="submit">Підписатися</button>
+</form>
+</section>
     </main>
 
     <footer>
@@ -260,7 +241,26 @@
         </p>
       </div>
     </footer>
+<div class="modal-overlay" id="modalOverlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 class="modal-title" id="modalTitle">Увійти</h2>
+        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
 
+        <div class="modal-field">
+          <label for="email">Електронна пошта</label>
+          <input id="email" type="email" placeholder="Введіть вашу пошту" />
+        </div>
+        <div class="modal-field">
+          <label for="password">Пароль</label>
+          <input id="password" type="password" placeholder="Введіть ваш пароль" />
+        </div>
+
+        <a href="index.html" class="modal-btn">Увійти</a>
+      </div>
+    </div>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

@@ -37,7 +37,6 @@ ul {
 }
 
 .content-wrap {
-  max-width: auto;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -329,7 +328,7 @@ h2 {
   justify-content: center;
 }
 .about-text {
-  font-family: var(--secondary-color);
+  font-family: var(--secondary-font);
   font-size: 15px;
   padding-left: 20px;
 }
@@ -708,8 +707,13 @@ h2 {
 .modal-field input:focus {
   border-color: var(--secondary-color);
 }
-
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .modal-btn {
+  width: 100%;
   background: var(--dark-color);
   color: #fff;
   border: none;
@@ -1469,7 +1473,6 @@ footer {
   }
   .main-menu li {
     margin: 0;
-    size: 1.25em;
   }
   .main-image {
     padding-left: 260px;

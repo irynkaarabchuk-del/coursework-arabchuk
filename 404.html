@@ -17,27 +17,6 @@
   </head>
 
   <body>
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title" id="modalTitle">Увійти</h2>
-        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
-
-        <div class="modal-field">
-          <label for="email">Електронна пошта</label>
-          <input id="email" type="email" placeholder="Введіть вашу пошту" />
-        </div>
-        <div class="modal-field">
-          <label for="password">Пароль</label>
-          <input id="password" type="password" placeholder="Введіть ваш пароль" />
-        </div>
-
-        <a href="index.html" class="modal-btn">Увійти</a>
-      </div>
-    </div>
-
     <header class="main-header">
       <nav class="navbar content-wrap d-flex">
         <div class="navbar-content d-flex">
@@ -137,7 +116,7 @@
           <h3>Службові сторінки</h3>
           <ul>
             <li>Посібник зі стилю</li>
-            <li>404 Сторінку не знайдено</li>
+            <li><a href="404.html">404 Сторінку не знайдено</a></li>
             <li>Захищено паролем</li>
             <li>Ліцензії</li>
             <li>Журнал змін</li>
@@ -153,7 +132,27 @@
         </p>
       </div>
     </footer>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <h2 class="modal-title" id="modalTitle">Увійти</h2>
+    <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
 
+    <form class="modal-form" id="loginForm" action="#" method="post">
+      <div class="modal-field">
+        <label for="email">Електронна пошта</label>
+        <input id="email" name="email" type="email" placeholder="Введіть вашу пошту" autocomplete="email" required />
+      </div>
+      <div class="modal-field">
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" placeholder="Введіть ваш пароль" autocomplete="current-password" minlength="6" required />
+      </div>
+      <button type="submit" class="modal-btn">Увійти</button>
+    </form>
+  </div>
+</div>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

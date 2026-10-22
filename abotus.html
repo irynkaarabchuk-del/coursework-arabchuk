@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,30 +17,6 @@
   </head>
 
   <body>
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal">
-        <button class="modal-close" id="modalClose">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title" id="modalTitle">Sign In</h2>
-        <p class="modal-subtitle">Welcome to Organick Store</p>
-        <div class="modal-field">
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="Enter your email" />
-        </div>
-        <div class="modal-field">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-          />
-        </div>
-        <a href="index.html">
-          <button class="modal-btn">Sign In</button>
-        </a>
-      </div>
-    </div>
 
     <header class="main-header">
       <nav class="navbar content-wrap d-flex">
@@ -91,7 +67,7 @@
       </nav>
 
       <div class="image d-flex">
-        <img src="assets/images/aboutus/about-us.png" alt="" />
+        <img src="assets/images/aboutus/about-us.png" alt="Про нас" />
         <h1 class="subtitle">Про нас</h1>
       </div>
     </header>
@@ -112,7 +88,7 @@
 
         <div class="information-about d-flex">
           <span class="text d-flex">Про нас</span>
-          <h2 class="about-heading" class="d-flex">
+          <h2 class="about-heading d-flex">
             Створюємо якісні продукти для вашого успіху
           </h2>
 
@@ -193,28 +169,28 @@
         <ul class="products why-cards">
           <li class="product-card why-card">
             <div class="feature-icon">
-              <img src="assets/images/icons/aboutus/return.png" />
+              <img src="assets/images/icons/aboutus/return.png" alt = "Повернення товару"/>
             </div>
             <h3>Повернення товару</h3>
             <p>Не сподобалось? Повернемо кошти без зайвих питань.</p>
           </li>
           <li class="product-card why-card">
             <div class="feature-icon">
-              <img src="assets/images/icons/aboutus/naturalfood.png" />
+              <img src="assets/images/icons/aboutus/naturalfood.png"  alt = "Свіжі продукти"/>
             </div>
             <h3>100% свіжість</h3>
             <p>Продукти надходять до вас просто з ферми.</p>
           </li>
           <li class="product-card why-card">
             <div class="feature-icon">
-              <img src="assets/images/icons/aboutus/phonetime.png" />
+              <img src="assets/images/icons/aboutus/phonetime.png" alt = "Підтримка"/>
             </div>
             <h3>Підтримка 24/7</h3>
             <p>Ми на зв'язку цілодобово, щоб допомогти з будь-яким питанням.</p>
           </li>
           <li class="product-card why-card">
             <div class="feature-icon">
-              <img src="assets/images/icons/aboutus/card.png" />
+              <img src="assets/images/icons/aboutus/card.png" alt="Безпечна оплата"/>
             </div>
             <h3>Безпечна оплата</h3>
             <p>Ваші платіжні дані надійно захищені.</p>
@@ -277,29 +253,40 @@
         <h2 class="offer-title about-heading">Що ми пропонуємо вам</h2>
         <div class="categories">
           <div class="category">
-            <img src="assets/images/aboutus/spicy.jpg" />
+            <img src="assets/images/aboutus/spicy.jpg" alt="Прянощі"/>
             <span class="category-title">Прянощі</span>
           </div>
 
           <div class="category">
-            <img src="assets/images/aboutus/nuts.png" />
+            <img src="assets/images/aboutus/nuts.png" alt="Горіхи та насіння"/>
             <span class="category-title">Горіхи та насіння</span>
           </div>
 
           <div class="category">
-            <img src="assets/images/aboutus/fruits.jpg" />
+            <img src="assets/images/aboutus/fruits.jpg" alt="Фрукти"/>
 
             <span class="category-title">Фрукти</span>
           </div>
 
           <div class="category">
             <div class="bcg d-flex">
-              <img src="assets/images/aboutus/vegetables.jpg" />
+              <img src="assets/images/aboutus/vegetables.jpg" alt="Овочі">
             </div>
             <span class="category-title">Овочі</span>
           </div>
         </div>
       </section>
+      <section class="newsletter d-flex">
+  <img src="assets/images/orange.jpg" alt="Нарізані апельсини на блакитному фоні" />
+  <div class="newsletter-text">
+    <h2>Підпишіться на нашу розсилку</h2>
+  </div>
+  <form class="newsletter-form" action="#" method="post">
+ 
+  <input id="newsletterEmail" name="email" type="email" placeholder="Ваша електронна адреса" required />
+  <button type="submit">Підписатися</button>
+</form>
+</section>
     </main>
     <footer>
       <div class="footer-content d-flex">
@@ -350,6 +337,27 @@
         </p>
       </div>
     </footer>
+    <div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <h2 class="modal-title" id="modalTitle">Увійти</h2>
+    <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
+
+    <form class="modal-form" id="loginForm" action="#" method="post">
+      <div class="modal-field">
+        <label for="email">Електронна пошта</label>
+        <input id="email" name="email" type="email" placeholder="Введіть вашу пошту" autocomplete="email" required />
+      </div>
+      <div class="modal-field">
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" placeholder="Введіть ваш пароль" autocomplete="current-password" minlength="6" required />
+      </div>
+      <button type="submit" class="modal-btn">Увійти</button>
+    </form>
+  </div>
+</div>
     <script src="assets/js/aboutus.js"></script>
   </body>
 </html>
