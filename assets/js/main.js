@@ -1,3 +1,26 @@
+// пошук в мобільній версії
+let searchForm = document.querySelector(".search-box");
+let searchButton = document.querySelector(".search-btn");
+let headerSearchInput = document.getElementById("headerSearch");
+
+if (searchForm && searchButton && headerSearchInput) {
+  searchButton.addEventListener("click", function (event) {
+    let isMobile = window.innerWidth < 768;
+    let isOpen = searchForm.classList.contains("is-open");
+
+    if (isMobile && !isOpen) {
+      event.preventDefault();
+      searchForm.classList.add("is-open");
+      headerSearchInput.focus();
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!searchForm.contains(event.target)) {
+      searchForm.classList.remove("is-open");
+    }
+  });
+}
 
 const iconBlock = document.getElementById('iconBlock');
 const iconOpen = document.getElementById('iconOpen');
