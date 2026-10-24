@@ -1874,3 +1874,7 @@ footer {
     width: 260px;
   }
 }
+.social-icon {
+  width: 22px;
+  height: 22px;
+}
