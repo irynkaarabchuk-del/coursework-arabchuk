@@ -1180,7 +1180,25 @@ footer {
   font-size: 14px;
   color: #525c60;
 }
-
+ .top-panel .search-box.is-open input[type="search"] {
+    display: block ;
+    position: fixed;
+    top: 90px;
+    left: 16px;
+    right: 16px;
+    z-index: 1000;
+    width: auto;
+    height: 50px;
+    padding: 0 20px;
+    border: 1px solid #dedddd;
+    border-radius: 30px;
+    background: #fff;
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    color: var(--dark-color);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    outline: none;
+  }
 /* ── ДЕСКТОП ── */
 @media (min-width: 768px) {
   .search-box {
@@ -1445,6 +1463,19 @@ footer {
   }
   .newsletter img {
     border-radius: 20px;
+  }
+
+  .top-panel .search-box input[type="search"] {
+    display: block ;
+    flex: 1;
+    min-width: 0;
+    align-self: stretch;
+    border: none;
+    background: transparent;
+    font-family: var(--secondary-font);
+    font-size: 15px;
+    color: var(--dark-color);
+    outline: none;
   }
 }
 @media (min-width: 1366px) {
