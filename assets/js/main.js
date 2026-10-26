@@ -174,7 +174,7 @@ if (shopCategory) {
   update();
 }
 
-// ── Відгуки: зміна по кліку на кружечки ──
+// відгуки
 let reviews = [
   {
     name: "Sara Taylor",
@@ -224,4 +224,247 @@ if (reviewImg && reviewDots.length) {
       showReview(i);
     });
   }
+}
+
+// Товари магазину
+let PRODUCTS = [
+  {
+    id: 1,
+    category: "Овочі",
+    img: "assets/images/brocoli1.png",
+    name: "Броколі калабрезе",
+    oldPrice: 20,
+    price: 13,
+    weight: "500 г",
+    shelf: "7 днів",
+    short: "Свіжа броколі з органічних господарств. Соковита, хрустка та повна вітамінів.",
+    long: "Броколі калабрезе вирощується без хімічних добрив і пестицидів. Багата на вітамін C, клітковину та антиоксиданти. Чудово підходить для супів, салатів, запікання та гарнірів.",
+  },
+  {
+    id: 2,
+    category: "Свіже",
+    img: "assets/images/bananes.png",
+    name: "Свіжі банани",
+    oldPrice: 20,
+    price: 14,
+    weight: "1 кг",
+    shelf: "5 днів",
+    short: "Солодкі стиглі банани — натуральне джерело енергії протягом дня.",
+    long: "Наші банани ретельно відбираються за якістю та стиглістю. Містять калій і природні цукри, ідеально підходять для перекусу, смузі та випічки.",
+  },
+  {
+    id: 3,
+    category: "Крупи",
+    img: "assets/images/nuts.png",
+    name: "Білі горіхи",
+    oldPrice: 20,
+    price: 15,
+    weight: "500 г",
+    shelf: "12 місяців",
+    short: "Натуральні білі горіхи без добавок і консервантів.",
+    long: "Білі горіхи багаті на білок, корисні жири та мінерали. Підходять як самостійний перекус, до каш, десертів і випічки.",
+  },
+  {
+    id: 4,
+    category: "Овочі",
+    img: "assets/images/tomato.png",
+    name: "Веганський червоний томат",
+    oldPrice: 20,
+    price: 17,
+    weight: "1 кг",
+    shelf: "7 днів",
+    short: "Соковиті червоні томати з насиченим смаком, вирощені природним способом.",
+    long: "Томати дозрівають на сонці та збираються вручну. Містять лікопін і вітаміни, чудово підходять для салатів, соусів і консервації.",
+  },
+  {
+    id: 5,
+    category: "Здоровʼя",
+    img: "assets/images/bean.png",
+    name: "Боби мунг",
+    oldPrice: 20,
+    price: 11,
+    weight: "500 г",
+    shelf: "12 місяців",
+    short: "Корисні боби мунг — джерело рослинного білка та клітковини.",
+    long: "Боби мунг легко засвоюються та швидко готуються. Підходять для супів, каш, салатів і пророщування.",
+  },
+  {
+    id: 6,
+    category: "Горіхи",
+    img: "assets/images/hazelnut.png",
+    name: "Коричневий фундук",
+    oldPrice: 20,
+    price: 12,
+    weight: "500 г",
+    shelf: "12 місяців",
+    short: "Ароматний фундук із насиченим горіховим смаком.",
+    long: "Фундук містить вітамін E, магній і корисні жири. Його можна їсти сирим, підсмаженим або додавати до десертів і шоколаду.",
+  },
+  {
+    id: 7,
+    category: "Свіже",
+    img: "assets/images/agges.png",
+    name: "Яйця",
+    oldPrice: 20,
+    price: 17,
+    weight: "10 шт.",
+    shelf: "25 днів",
+    short: "Свіжі яйця від курей вільного вигулу з перевірених ферм.",
+    long: "Яйця надходять просто з ферми та проходять контроль якості. Джерело білка та вітамінів групи B, підходять для сніданків і випічки.",
+  },
+  {
+    id: 8,
+    category: "Свіже",
+    img: "assets/images/bread.png",
+    name: "Сухарики Zelco Suji Elaichi",
+    oldPrice: 20,
+    price: 15,
+    weight: "300 г",
+    shelf: "6 місяців",
+    short: "Хрусткі сухарики з легким ароматом кардамону.",
+    long: "Випікаються з якісного борошна з додаванням натуральних спецій. Чудово поєднуються з чаєм, кавою або молоком.",
+  },
+  {
+    id: 9,
+    category: "Здоровʼя",
+    img: "assets/images/shop/bean.png",
+    name: "Цукіні",
+    oldPrice: 20,
+    price: 11,
+    weight: "1 кг",
+    shelf: "10 днів",
+    short: "Ніжні молоді цукіні з органічних грядок.",
+    long: "Цукіні низькокалорійні та багаті на воду й клітковину. Відмінно підходять для смаження, запікання, рагу та оладок.",
+  },
+  {
+    id: 10,
+    category: "Горіхи",
+    img: "assets/images/shop/hazelnut.png",
+    name: "Горіхи кеш'ю",
+    oldPrice: 20,
+    price: 12,
+    weight: "500 г",
+    shelf: "12 місяців",
+    short: "Вершкові горіхи кеш'ю з ніжним солодкуватим смаком.",
+    long: "Кеш'ю містять магній, цинк і корисні жири. Підходять для перекусу, соусів, веганських десертів і страв азійської кухні.",
+  },
+  {
+    id: 11,
+    category: "Свіже",
+    img: "assets/images/shop/corn.png",
+    name: "Свіжа кукурудза",
+    oldPrice: 20,
+    price: 17,
+    weight: "4 шт.",
+    shelf: "5 днів",
+    short: "Солодка молода кукурудза просто з поля.",
+    long: "Качани збираються у період молочної стиглості, тому зерна соковиті й солодкі. Можна варити, запікати на грилі або додавати до салатів.",
+  },
+  {
+    id: 12,
+    category: "Горіхи",
+    img: "assets/images/shop/almonds.png",
+    name: "Органічний мигдаль",
+    oldPrice: 20,
+    price: 15,
+    weight: "500 г",
+    shelf: "12 місяців",
+    short: "Органічний мигдаль без обробки та добавок.",
+    long: "Мигдаль багатий на вітамін E, кальцій і білок. Підходить для перекусу, випічки, домашнього мигдального молока та пасти.",
+  },
+];
+
+
+function formatPrice(value) {
+  return "$" + value.toFixed(2);
+}
+
+// шукаємо товар за id
+function findProductById(id) {
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    if (PRODUCTS[i].id === id) {
+      return PRODUCTS[i];
+    }
+  }
+  return null;
+}
+
+// шукаємо товар за назвою
+function findProductByName(name) {
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    if (PRODUCTS[i].name === name) {
+      return PRODUCTS[i];
+    }
+  }
+  return null;
+}
+
+
+// робимо клікабельними картки
+function linkShopCards() {
+  let cards = document.querySelectorAll(".shop-products .product-card");
+
+  for (let i = 0; i < cards.length; i++) {
+    let card = cards[i];
+    let title = card.querySelector("h3");
+    let product = findProductByName(title.textContent.trim());
+
+    if (product === null) {
+      continue;
+    }
+
+    // робимо з назви посилання на сторінку товару
+    let link = document.createElement("a");
+    link.className = "product-card-link";
+    link.href = "shopSingle.html?id=" + product.id;
+    link.textContent = product.name;
+    title.textContent = "";
+    title.appendChild(link);
+
+    // клік по будь-якому місцю картки теж відкриває товар
+    card.addEventListener("click", function (event) {
+      if (event.target.closest("a")) {
+        return;
+      }
+      window.location.href = link.href;
+    });
+  }
+}
+
+function initProductPage() {
+
+  let params = new URLSearchParams(window.location.search);
+  let id = Number(params.get("id"));
+  let product = findProductById(id);
+
+  if (params.get("id") === null) {
+    product = PRODUCTS[0];
+  }
+
+  if (product === null) {
+    window.location.href = "404.html";
+    return;
+  }
+
+  document.title = product.name + " — Organick";
+  document.getElementById("pImage").src = product.img;
+  document.getElementById("pImage").alt = product.name;
+  document.getElementById("pBadge").textContent = product.category;
+  document.getElementById("pName").textContent = product.name;
+  document.getElementById("pOld").textContent = formatPrice(product.oldPrice);
+  document.getElementById("pNew").textContent = formatPrice(product.price);
+  document.getElementById("pShort").textContent = product.short;
+  document.getElementById("pLong").textContent = product.long;
+  document.getElementById("pWeight").textContent = product.weight;
+  document.getElementById("pOrigin").textContent = "Україна";
+  document.getElementById("pCategory").textContent = product.category;
+  document.getElementById("pShelf").textContent = product.shelf;
+}
+
+if (document.querySelector(".shop-products .product-card")) {
+  linkShopCards();
+}
+
+if (document.getElementById("pName")) {
+  initProductPage();
 }

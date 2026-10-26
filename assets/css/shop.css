@@ -5,9 +5,15 @@
 .shop-products .product-card img {
   mix-blend-mode: multiply;
 }
+.product-card {
+  cursor: pointer;
+}
 
+.product-card-link {
+  color: inherit;
+}
 [hidden] {
-  display: none !important;
+  display: none;
 }
 
 .shop-toolbar {
