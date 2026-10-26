@@ -569,12 +569,19 @@ h2 {
 .girl {
   width: 115px;
   height: 115px;
+  flex-shrink: 0;
   border: none;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  background: #fff;
 }
 .testimonial-girl {
+  max-width: 100%;
+  padding: 0 20px 0 0;
   font-size: 18px;
   line-height: 1.6;
+  text-align: center;
   color: #525c60;
   font-family: var(--secondary-font);
 }
@@ -597,11 +604,13 @@ h2 {
 .testimonial-page {
   width: 8px;
   height: 8px;
+  padding: 0;
   border: none;
   border-radius: 50%;
   background-color: #c4c4c4;
+  cursor: pointer;
 }
-.second {
+.testimonial-page.active {
   background-color: var(--secondary-color);
 }
 .stats {

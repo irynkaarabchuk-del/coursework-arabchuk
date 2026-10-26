@@ -173,3 +173,55 @@ if (shopCategory) {
   fillCategories();
   update();
 }
+
+// ── Відгуки: зміна по кліку на кружечки ──
+let reviews = [
+  {
+    name: "Sara Taylor",
+    role: "Покупець",
+    img: "assets/images/girl.jpg",
+    text: "Замовляю в Organick вже пів року. Овочі завжди свіжі, доставка швидка, а смак як з бабусиного городу. Дуже рекомендую!",
+  },
+  {
+    name: "Олена Коваль",
+    role: "Постійна клієнтка",
+    img: "assets/images/olena.jpg",
+    text: "Нарешті знайшла місце, де справді органічні продукти. Яйця й овочі смакують як з села, а доставка завжди вчасно.",
+  },
+  {
+    name: "Андрій Мельник",
+    role: "Власник кафе",
+    img: "assets/images/andrew.jpg",
+    text: "Беремо в Organick горіхи та крупи для нашого кафе. Якість стабільна, відвідувачі помічають різницю в смаку.",
+  },
+];
+
+let reviewImg = document.getElementById("reviewImg");
+let reviewText = document.getElementById("reviewText");
+let reviewName = document.getElementById("reviewName");
+let reviewRole = document.getElementById("reviewRole");
+let reviewDots = document.querySelectorAll(".testimonial-page");
+
+function showReview(index) {
+  let review = reviews[index];
+
+  reviewImg.src = review.img;
+  reviewImg.alt = review.name;
+  reviewText.textContent = review.text;
+  reviewName.textContent = review.name;
+  reviewRole.textContent = review.role;
+
+  // підсвічуємо тільки той кружечок, на який натиснули
+  for (let i = 0; i < reviewDots.length; i++) {
+    reviewDots[i].classList.toggle("active", i === index);
+  }
+}
+
+// працює тільки там, де є блок відгуків (головна сторінка)
+if (reviewImg && reviewDots.length) {
+  for (let i = 0; i < reviewDots.length; i++) {
+    reviewDots[i].addEventListener("click", function () {
+      showReview(i);
+    });
+  }
+}
