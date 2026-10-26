@@ -225,7 +225,9 @@ if (reviewImg && reviewDots.length) {
     });
   }
 }
-// ===== Товари магазину =====
+
+// Магазин
+
 let PRODUCTS = [
   {
     id: 1,
@@ -373,7 +375,6 @@ let PRODUCTS = [
   },
 ];
 
-// ціна у вигляді $13.00
 function formatPrice(value) {
   return "$" + value.toFixed(2);
 }
@@ -398,8 +399,7 @@ function findProductByName(name) {
   return null;
 }
 
-// ===== Сторінка «Магазин» =====
-// Картки вже є в HTML, тут робимо їх клікабельними
+//  робимо картки клікабельними
 function linkShopCards() {
   let cards = document.querySelectorAll(".shop-products .product-card");
 
@@ -430,9 +430,35 @@ function linkShopCards() {
   }
 }
 
-// ===== Сторінка товару =====
+function createProductCard(product) {
+  let card = document.createElement("article");
+  card.className = "product-card";
+
+  card.innerHTML =
+    '<span class="badge">' + product.category + "</span>" +
+    '<img src="' + product.img + '" alt="' + product.name + '" />' +
+    '<div class="product-info">' +
+    '<h3><a class="product-card-link" href="shopSingle.html?id=' + product.id + '">' + product.name + "</a></h3>" +
+    '<div class="product-bottom">' +
+    '<div class="prices">' +
+    '<span class="old-price">' + formatPrice(product.oldPrice) + "</span>" +
+    '<span class="new-price">' + formatPrice(product.price) + "</span>" +
+    "</div>" +
+    '<div class="rating"><span></span><span></span><span></span><span></span><span></span></div>' +
+    "</div>" +
+    "</div>";
+
+  card.addEventListener("click", function (event) {
+    if (event.target.closest("a")) {
+      return;
+    }
+    window.location.href = "shopSingle.html?id=" + product.id;
+  });
+
+  return card;
+}
+
 function initProductPage() {
-  // беремо id з адреси: shopSingle.html?id=3
   let params = new URLSearchParams(window.location.search);
   let id = Number(params.get("id"));
   let product = findProductById(id);
@@ -463,6 +489,26 @@ function initProductPage() {
   document.getElementById("pCategory").textContent = product.category;
   document.getElementById("pShelf").textContent = product.shelf;
 
+  let related = [];
+
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    if (PRODUCTS[i].id !== product.id && PRODUCTS[i].category === product.category) {
+      related.push(PRODUCTS[i]);
+    }
+  }
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    if (PRODUCTS[i].id !== product.id && PRODUCTS[i].category !== product.category) {
+      related.push(PRODUCTS[i]);
+    }
+  }
+
+  let relatedBox = document.getElementById("relatedProducts");
+  relatedBox.innerHTML = "";
+
+  for (let i = 0; i < 4; i++) {
+    relatedBox.appendChild(createProductCard(related[i]));
+  }
+
   // вкладки «Опис товару» і «Додаткова інформація»
   let tabButtons = document.querySelectorAll(".tab-btn");
   let tabContents = document.querySelectorAll(".tab-content");
@@ -477,9 +523,15 @@ function initProductPage() {
       document.getElementById("tab-" + tabButtons[i].dataset.tab).classList.add("active");
     });
   }
+
+  let qty = document.getElementById("qty");
+  qty.addEventListener("change", function () {
+    if (qty.value === "" || Number(qty.value) < 1) {
+      qty.value = 1;
+    }
+  });
 }
 
-// запускаємо код тільки на потрібній сторінці
 if (document.querySelector(".shop-products .product-card")) {
   linkShopCards();
 }
