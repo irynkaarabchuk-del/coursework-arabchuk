@@ -539,3 +539,34 @@ if (document.querySelector(".shop-products .product-card")) {
 if (document.getElementById("pName")) {
   initProductPage();
 }
+
+
+// ===== Кошик =====
+let cartText = document.querySelector(".cart-box span");
+let cartCount = Number(localStorage.getItem("cartCount")) || 0;
+
+// показуємо цифру в шапці
+function showCartCount() {
+  if (cartText) {
+    cartText.textContent = "Кошик (" + cartCount + ")";
+  }
+}
+
+showCartCount();
+
+// кнопка «Додати в кошик» на сторінці товару
+let addToCartButton = document.querySelector(".single-cart-btn");
+
+if (addToCartButton) {
+  addToCartButton.addEventListener("click", function () {
+    let qty = Number(document.getElementById("qty").value);
+
+    if (qty < 1) {
+      qty = 1;
+    }
+
+    cartCount = cartCount + qty;
+    localStorage.setItem("cartCount", cartCount);
+    showCartCount();
+  });
+}

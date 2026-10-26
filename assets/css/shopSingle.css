@@ -183,7 +183,6 @@
   mix-blend-mode: multiply;
 }
 
-
 @media (min-width: 768px) {
   .single-product {
     display: grid;
