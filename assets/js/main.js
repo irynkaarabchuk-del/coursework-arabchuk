@@ -225,8 +225,7 @@ if (reviewImg && reviewDots.length) {
     });
   }
 }
-
-// Товари магазину
+// ===== Товари магазину =====
 let PRODUCTS = [
   {
     id: 1,
@@ -374,7 +373,7 @@ let PRODUCTS = [
   },
 ];
 
-
+// ціна у вигляді $13.00
 function formatPrice(value) {
   return "$" + value.toFixed(2);
 }
@@ -399,8 +398,8 @@ function findProductByName(name) {
   return null;
 }
 
-
-// робимо клікабельними картки
+// ===== Сторінка «Магазин» =====
+// Картки вже є в HTML, тут робимо їх клікабельними
 function linkShopCards() {
   let cards = document.querySelectorAll(".shop-products .product-card");
 
@@ -431,21 +430,25 @@ function linkShopCards() {
   }
 }
 
+// ===== Сторінка товару =====
 function initProductPage() {
-
+  // беремо id з адреси: shopSingle.html?id=3
   let params = new URLSearchParams(window.location.search);
   let id = Number(params.get("id"));
   let product = findProductById(id);
 
+  // якщо id немає, показуємо перший товар
   if (params.get("id") === null) {
     product = PRODUCTS[0];
   }
 
+  // якщо такого товару немає, відкриваємо 404
   if (product === null) {
     window.location.href = "404.html";
     return;
   }
 
+  // підставляємо дані товару на сторінку
   document.title = product.name + " — Organick";
   document.getElementById("pImage").src = product.img;
   document.getElementById("pImage").alt = product.name;
@@ -459,8 +462,24 @@ function initProductPage() {
   document.getElementById("pOrigin").textContent = "Україна";
   document.getElementById("pCategory").textContent = product.category;
   document.getElementById("pShelf").textContent = product.shelf;
+
+  // вкладки «Опис товару» і «Додаткова інформація»
+  let tabButtons = document.querySelectorAll(".tab-btn");
+  let tabContents = document.querySelectorAll(".tab-content");
+
+  for (let i = 0; i < tabButtons.length; i++) {
+    tabButtons[i].addEventListener("click", function () {
+      for (let j = 0; j < tabButtons.length; j++) {
+        tabButtons[j].classList.remove("active");
+        tabContents[j].classList.remove("active");
+      }
+      tabButtons[i].classList.add("active");
+      document.getElementById("tab-" + tabButtons[i].dataset.tab).classList.add("active");
+    });
+  }
 }
 
+// запускаємо код тільки на потрібній сторінці
 if (document.querySelector(".shop-products .product-card")) {
   linkShopCards();
 }
