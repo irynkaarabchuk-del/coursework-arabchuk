@@ -93,15 +93,13 @@
 .single-cart-btn {
   margin: 0;
   cursor: pointer;
+  gap: 0;
 }
 
 .single-cart-btn .arrow-icon {
   transform: none;
 }
 
-.single-cart-btn {
-  gap: 0;
-}
 
 .single-cart-btn .new-shop {
   padding-right: 22px;
@@ -154,8 +152,6 @@
 .info-list {
   display: inline-block;
   text-align: left;
-  list-style: none;
-  padding: 0;
 }
 
 .info-list li {

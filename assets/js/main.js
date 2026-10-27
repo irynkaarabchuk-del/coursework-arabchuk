@@ -541,11 +541,10 @@ if (document.getElementById("pName")) {
 }
 
 
-// ===== Кошик =====
+// Кошик
 let cartText = document.querySelector(".cart-box span");
 let cartCount = Number(localStorage.getItem("cartCount")) || 0;
 
-// показуємо цифру в шапці
 function showCartCount() {
   if (cartText) {
     cartText.textContent = "Кошик (" + cartCount + ")";
@@ -554,7 +553,6 @@ function showCartCount() {
 
 showCartCount();
 
-// кнопка «Додати в кошик» на сторінці товару
 let addToCartButton = document.querySelector(".single-cart-btn");
 
 if (addToCartButton) {
