@@ -94,3 +94,10 @@
 }
 
 
+.shop-empty button {
+  margin-top: 16px;
+}
+
+.product-status {
+  padding: 60px 0;
+}

@@ -92,7 +92,7 @@
   },
   {
     "id": "rusks",
-    "name": "Сухарики Zelco Suji Elaichi",
+    "name": "Сухарики з манної крупи",
     "category": "Свіже",
     "price": 15,
     "oldPrice": 20,
@@ -109,7 +109,7 @@
     "category": "Здоровʼя",
     "price": 11,
     "oldPrice": 20,
-    "image": "assets/images/shop/zucchini.png",
+    "image": "assets/images/zucchini.png",
     "description": "Ніжні молоді цукіні з тонкою шкіркою та соковитою мʼякоттю.",
     "details": "Дуже низькокалорійні, близько 20 ккал на 100 г. Містять калій, вітамін C та клітковину. Їх смажать, запікають, тушкують або готують оладки.",
     "weight": "1 кг",

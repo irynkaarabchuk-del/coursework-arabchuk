@@ -66,113 +66,6 @@ document.querySelectorAll(
   observer.observe(el);
 });
 
-//  Магазин: пошук, фільтр, сортування
-let shopCategory = document.getElementById("shopCategory");
-
-if (shopCategory) {
-  let grid = document.querySelector(".shop-products .products");
-  let searchInput = document.getElementById("headerSearch");
-  let sortSelect = document.getElementById("shopSort");
-  let resetButton = document.getElementById("shopReset");
-  let emptyMessage = document.getElementById("shopEmpty");
-
-  let cards = Array.from(grid.children);
-
-  function getName(card) {
-    return card.querySelector("h3").textContent;
-  }
-
-  function getCategory(card) {
-    return card.querySelector(".badge").textContent;
-  }
-
-  function getPrice(card) {
-    let text = card.querySelector(".new-price").textContent;
-    return parseFloat(text.replace("$", ""));
-  }
-
-  function fillCategories() {
-    let names = [];
-    for (let i = 0; i < cards.length; i++) {
-      let name = getCategory(cards[i]);
-      if (!names.includes(name)) {
-        names.push(name);
-      }
-    }
-    for (let i = 0; i < names.length; i++) {
-      let option = document.createElement("option");
-      option.value = names[i];
-      option.textContent = names[i];
-      shopCategory.appendChild(option);
-    }
-  }
-
-  function sortCards() {
-    let sorted = cards.slice();
-    let mode = sortSelect.value;
-
-    if (mode === "price-asc") {
-      sorted.sort(function (a, b) { return getPrice(a) - getPrice(b); });
-    } else if (mode === "price-desc") {
-      sorted.sort(function (a, b) { return getPrice(b) - getPrice(a); });
-    } else if (mode === "name-asc") {
-      sorted.sort(function (a, b) { return getName(a).localeCompare(getName(b), "uk"); });
-    } else if (mode === "name-desc") {
-      sorted.sort(function (a, b) { return getName(b).localeCompare(getName(a), "uk"); });
-    }
-
-    for (let i = 0; i < sorted.length; i++) {
-      grid.appendChild(sorted[i]);
-    }
-  }
-
-  function update() {
-    let text = searchInput.value.toLowerCase();
-    let category = shopCategory.value;
-    let found = 0;
-
-    for (let i = 0; i < cards.length; i++) {
-      let card = cards[i];
-      let nameOk = getName(card).toLowerCase().includes(text);
-      let categoryOk = category === "" || getCategory(card) === category;
-
-      if (nameOk && categoryOk) {
-        card.hidden = false;
-        found = found + 1;
-      } else {
-        card.hidden = true;
-      }
-    }
-
-    sortCards();
-    if (emptyMessage) {
-  emptyMessage.hidden = found > 0;
-}
-  }
-
-  searchInput.addEventListener("input", update);
-  shopCategory.addEventListener("change", update);
-  sortSelect.addEventListener("change", update);
-
-  searchInput.form.addEventListener("submit", function (event) {
-    event.preventDefault();
-  });
-
- if (resetButton) {
-  resetButton.addEventListener("click", function () {
-    searchInput.value = "";
-    shopCategory.value = "";
-    sortSelect.value = "default";
-    update();
-  });
-}
-
-  let params = new URLSearchParams(window.location.search);
-  searchInput.value = params.get("search") || "";
-
-  fillCategories();
-  update();
-}
 
 // відгуки
 let reviews = [
@@ -225,288 +118,262 @@ if (reviewImg && reviewDots.length) {
     });
   }
 }
-
 // Магазин
 
-let PRODUCTS = [
-  {
-    id: 1,
-    category: "Овочі",
-    img: "assets/images/brocoli1.png",
-    name: "Броколі калабрезе",
-    oldPrice: 20,
-    price: 13,
-    weight: "500 г",
-    shelf: "7 днів",
-    short: "Свіжа броколі з органічних господарств. Соковита, хрустка та повна вітамінів.",
-    long: "Броколі калабрезе вирощується без хімічних добрив і пестицидів. Багата на вітамін C, клітковину та антиоксиданти. Чудово підходить для супів, салатів, запікання та гарнірів.",
-  },
-  {
-    id: 2,
-    category: "Свіже",
-    img: "assets/images/bananes.png",
-    name: "Свіжі банани",
-    oldPrice: 20,
-    price: 14,
-    weight: "1 кг",
-    shelf: "5 днів",
-    short: "Солодкі стиглі банани — натуральне джерело енергії протягом дня.",
-    long: "Наші банани ретельно відбираються за якістю та стиглістю. Містять калій і природні цукри, ідеально підходять для перекусу, смузі та випічки.",
-  },
-  {
-    id: 3,
-    category: "Крупи",
-    img: "assets/images/nuts.png",
-    name: "Білі горіхи",
-    oldPrice: 20,
-    price: 15,
-    weight: "500 г",
-    shelf: "12 місяців",
-    short: "Натуральні білі горіхи без добавок і консервантів.",
-    long: "Білі горіхи багаті на білок, корисні жири та мінерали. Підходять як самостійний перекус, до каш, десертів і випічки.",
-  },
-  {
-    id: 4,
-    category: "Овочі",
-    img: "assets/images/tomato.png",
-    name: "Веганський червоний томат",
-    oldPrice: 20,
-    price: 17,
-    weight: "1 кг",
-    shelf: "7 днів",
-    short: "Соковиті червоні томати з насиченим смаком, вирощені природним способом.",
-    long: "Томати дозрівають на сонці та збираються вручну. Містять лікопін і вітаміни, чудово підходять для салатів, соусів і консервації.",
-  },
-  {
-    id: 5,
-    category: "Здоровʼя",
-    img: "assets/images/bean.png",
-    name: "Боби мунг",
-    oldPrice: 20,
-    price: 11,
-    weight: "500 г",
-    shelf: "12 місяців",
-    short: "Корисні боби мунг — джерело рослинного білка та клітковини.",
-    long: "Боби мунг легко засвоюються та швидко готуються. Підходять для супів, каш, салатів і пророщування.",
-  },
-  {
-    id: 6,
-    category: "Горіхи",
-    img: "assets/images/hazelnut.png",
-    name: "Коричневий фундук",
-    oldPrice: 20,
-    price: 12,
-    weight: "500 г",
-    shelf: "12 місяців",
-    short: "Ароматний фундук із насиченим горіховим смаком.",
-    long: "Фундук містить вітамін E, магній і корисні жири. Його можна їсти сирим, підсмаженим або додавати до десертів і шоколаду.",
-  },
-  {
-    id: 7,
-    category: "Свіже",
-    img: "assets/images/agges.png",
-    name: "Яйця",
-    oldPrice: 20,
-    price: 17,
-    weight: "10 шт.",
-    shelf: "25 днів",
-    short: "Свіжі яйця від курей вільного вигулу з перевірених ферм.",
-    long: "Яйця надходять просто з ферми та проходять контроль якості. Джерело білка та вітамінів групи B, підходять для сніданків і випічки.",
-  },
-  {
-    id: 8,
-    category: "Свіже",
-    img: "assets/images/bread.png",
-    name: "Сухарики Zelco Suji Elaichi",
-    oldPrice: 20,
-    price: 15,
-    weight: "300 г",
-    shelf: "6 місяців",
-    short: "Хрусткі сухарики з легким ароматом кардамону.",
-    long: "Випікаються з якісного борошна з додаванням натуральних спецій. Чудово поєднуються з чаєм, кавою або молоком.",
-  },
-  {
-    id: 9,
-    category: "Здоровʼя",
-    img: "assets/images/shop/bean.png",
-    name: "Цукіні",
-    oldPrice: 20,
-    price: 11,
-    weight: "1 кг",
-    shelf: "10 днів",
-    short: "Ніжні молоді цукіні з органічних грядок.",
-    long: "Цукіні низькокалорійні та багаті на воду й клітковину. Відмінно підходять для смаження, запікання, рагу та оладок.",
-  },
-  {
-    id: 10,
-    category: "Горіхи",
-    img: "assets/images/shop/hazelnut.png",
-    name: "Горіхи кеш'ю",
-    oldPrice: 20,
-    price: 12,
-    weight: "500 г",
-    shelf: "12 місяців",
-    short: "Вершкові горіхи кеш'ю з ніжним солодкуватим смаком.",
-    long: "Кеш'ю містять магній, цинк і корисні жири. Підходять для перекусу, соусів, веганських десертів і страв азійської кухні.",
-  },
-  {
-    id: 11,
-    category: "Свіже",
-    img: "assets/images/shop/corn.png",
-    name: "Свіжа кукурудза",
-    oldPrice: 20,
-    price: 17,
-    weight: "4 шт.",
-    shelf: "5 днів",
-    short: "Солодка молода кукурудза просто з поля.",
-    long: "Качани збираються у період молочної стиглості, тому зерна соковиті й солодкі. Можна варити, запікати на грилі або додавати до салатів.",
-  },
-  {
-    id: 12,
-    category: "Горіхи",
-    img: "assets/images/shop/almonds.png",
-    name: "Органічний мигдаль",
-    oldPrice: 20,
-    price: 15,
-    weight: "500 г",
-    shelf: "12 місяців",
-    short: "Органічний мигдаль без обробки та добавок.",
-    long: "Мигдаль багатий на вітамін E, кальцій і білок. Підходить для перекусу, випічки, домашнього мигдального молока та пасти.",
-  },
-];
+// адреса, звідки беремо товари
+const PRODUCTS_URL = "assets/data/products.json";
+
+// асинхронно завантажуємо список товарів
+async function loadProducts() {
+  let response = await fetch(PRODUCTS_URL);
+
+  if (!response.ok) {
+    throw new Error("Сервер відповів з помилкою " + response.status);
+  }
+
+  return await response.json();
+}
 
 function formatPrice(value) {
   return "$" + value.toFixed(2);
 }
 
-// шукаємо товар за id
-function findProductById(id) {
-  for (let i = 0; i < PRODUCTS.length; i++) {
-    if (PRODUCTS[i].id === id) {
-      return PRODUCTS[i];
-    }
+function createElement(tag, className, text) {
+  let element = document.createElement(tag);
+  if (className) {
+    element.className = className;
   }
-  return null;
+  if (text) {
+    element.textContent = text;
+  }
+  return element;
 }
 
-// шукаємо товар за назвою
-function findProductByName(name) {
-  for (let i = 0; i < PRODUCTS.length; i++) {
-    if (PRODUCTS[i].name === name) {
-      return PRODUCTS[i];
-    }
-  }
-  return null;
-}
-
-//  робимо картки клікабельними
-function linkShopCards() {
-  let cards = document.querySelectorAll(".shop-products .product-card");
-
-  for (let i = 0; i < cards.length; i++) {
-    let card = cards[i];
-    let title = card.querySelector("h3");
-    let product = findProductByName(title.textContent.trim());
-
-    if (product === null) {
-      continue;
-    }
-
-    // робимо з назви посилання на сторінку товару
-    let link = document.createElement("a");
-    link.className = "product-card-link";
-    link.href = "shopSingle.html?id=" + product.id;
-    link.textContent = product.name;
-    title.textContent = "";
-    title.appendChild(link);
-
-    // клік по будь-якому місцю картки теж відкриває товар
-    card.addEventListener("click", function (event) {
-      if (event.target.closest("a")) {
-        return;
-      }
-      window.location.href = link.href;
-    });
-  }
-}
-
+// будуємо картку товару з обʼєкта даних
 function createProductCard(product) {
-  let card = document.createElement("article");
-  card.className = "product-card";
+  let url = "shopSingle.html?id=" + product.id;
 
-  card.innerHTML =
-    '<span class="badge">' + product.category + "</span>" +
-    '<img src="' + product.img + '" alt="' + product.name + '" />' +
-    '<div class="product-info">' +
-    '<h3><a class="product-card-link" href="shopSingle.html?id=' + product.id + '">' + product.name + "</a></h3>" +
-    '<div class="product-bottom">' +
-    '<div class="prices">' +
-    '<span class="old-price">' + formatPrice(product.oldPrice) + "</span>" +
-    '<span class="new-price">' + formatPrice(product.price) + "</span>" +
-    "</div>" +
-    '<div class="rating"><span></span><span></span><span></span><span></span><span></span></div>' +
-    "</div>" +
-    "</div>";
+  let card = createElement("article", "product-card");
+  let badge = createElement("span", "badge", product.category);
+
+  let image = document.createElement("img");
+  image.src = product.image;
+  image.alt = product.name;
+
+  let info = createElement("div", "product-info");
+  let title = document.createElement("h3");
+  let link = createElement("a", "product-card-link", product.name);
+  link.href = url;
+  title.appendChild(link);
+
+  let bottom = createElement("div", "product-bottom");
+  let prices = createElement("div", "prices");
+  prices.appendChild(createElement("span", "old-price", formatPrice(product.oldPrice)));
+  prices.appendChild(createElement("span", "new-price", formatPrice(product.price)));
+
+  let rating = createElement("div", "rating");
+  for (let i = 0; i < 5; i++) {
+    rating.appendChild(document.createElement("span"));
+  }
+
+  bottom.appendChild(prices);
+  bottom.appendChild(rating);
+  info.appendChild(title);
+  info.appendChild(bottom);
+
+  card.appendChild(badge);
+  card.appendChild(image);
+  card.appendChild(info);
+
 
   card.addEventListener("click", function (event) {
     if (event.target.closest("a")) {
       return;
     }
-    window.location.href = "shopSingle.html?id=" + product.id;
+    window.location.href = url;
   });
 
   return card;
 }
 
-function initProductPage() {
+function showLoadError(box, retry) {
+  box.textContent = "Не вдалося завантажити товари. Перевірте зʼєднання з інтернетом.";
+
+  let button = createElement("button", "shop-toolbar-reset", "Спробувати ще раз");
+  button.type = "button";
+  button.addEventListener("click", retry);
+
+  box.appendChild(document.createElement("br"));
+  box.appendChild(button);
+  box.hidden = false;
+}
+
+// Каталог: завантаження, пошук, фільтр, сортування
+function initShopPage() {
+  let grid = document.getElementById("shopGrid");
+  let statusBox = document.getElementById("shopStatus");
+  let emptyMessage = document.getElementById("shopEmpty");
+  let searchInput = document.getElementById("headerSearch");
+  let categorySelect = document.getElementById("shopCategory");
+  let sortSelect = document.getElementById("shopSort");
+  let resetButton = document.getElementById("shopReset");
+
+  let products = [];
+
+  function fillCategories() {
+    let names = [];
+    for (let i = 0; i < products.length; i++) {
+      if (!names.includes(products[i].category)) {
+        names.push(products[i].category);
+      }
+    }
+    for (let i = 0; i < names.length; i++) {
+      let option = createElement("option", "", names[i]);
+      option.value = names[i];
+      categorySelect.appendChild(option);
+    }
+  }
+
+  function render() {
+    let text = searchInput.value.trim().toLowerCase();
+    let category = categorySelect.value;
+    let mode = sortSelect.value;
+
+    let visible = products.filter(function (product) {
+      let nameOk = product.name.toLowerCase().includes(text);
+      let categoryOk = category === "" || product.category === category;
+      return nameOk && categoryOk;
+    });
+
+    if (mode === "price-asc") {
+      visible.sort(function (a, b) { return a.price - b.price; });
+    } else if (mode === "price-desc") {
+      visible.sort(function (a, b) { return b.price - a.price; });
+    } else if (mode === "name-asc") {
+      visible.sort(function (a, b) { return a.name.localeCompare(b.name, "uk"); });
+    } else if (mode === "name-desc") {
+      visible.sort(function (a, b) { return b.name.localeCompare(a.name, "uk"); });
+    }
+
+    grid.innerHTML = "";
+    for (let i = 0; i < visible.length; i++) {
+      grid.appendChild(createProductCard(visible[i]));
+    }
+
+    emptyMessage.hidden = visible.length > 0;
+  }
+
+  async function start() {
+    statusBox.textContent = "Завантаження товарів…";
+    statusBox.hidden = false;
+
+    try {
+      products = await loadProducts();
+      statusBox.hidden = true;
+      fillCategories();
+      render();
+    } catch (error) {
+      console.error("Помилка завантаження товарів:", error);
+      showLoadError(statusBox, start);
+    }
+  }
+
+  searchInput.addEventListener("input", render);
+  categorySelect.addEventListener("change", render);
+  sortSelect.addEventListener("change", render);
+
+
+  searchInput.form.addEventListener("submit", function (event) {
+    event.preventDefault();
+  });
+
+  resetButton.addEventListener("click", function () {
+    searchInput.value = "";
+    categorySelect.value = "";
+    sortSelect.value = "default";
+    render();
+  });
+
   let params = new URLSearchParams(window.location.search);
-  let id = Number(params.get("id"));
-  let product = findProductById(id);
+  searchInput.value = params.get("search") || "";
 
-  // якщо id немає, показуємо перший товар
-  if (params.get("id") === null) {
-    product = PRODUCTS[0];
-  }
+  start();
+}
 
-  // якщо такого товару немає, відкриваємо 404
-  if (product === null) {
-    window.location.href = "404.html";
-    return;
-  }
-
-  // підставляємо дані товару на сторінку
+// Сторінка одного товару
+function showProduct(product, products) {
   document.title = product.name + " — Organick";
-  document.getElementById("pImage").src = product.img;
+  document.getElementById("pImage").src = product.image;
   document.getElementById("pImage").alt = product.name;
   document.getElementById("pBadge").textContent = product.category;
   document.getElementById("pName").textContent = product.name;
   document.getElementById("pOld").textContent = formatPrice(product.oldPrice);
   document.getElementById("pNew").textContent = formatPrice(product.price);
-  document.getElementById("pShort").textContent = product.short;
-  document.getElementById("pLong").textContent = product.long;
+  document.getElementById("pShort").textContent = product.description;
+  document.getElementById("pLong").textContent = product.details;
   document.getElementById("pWeight").textContent = product.weight;
-  document.getElementById("pOrigin").textContent = "Україна";
+  document.getElementById("pOrigin").textContent = product.origin;
   document.getElementById("pCategory").textContent = product.category;
-  document.getElementById("pShelf").textContent = product.shelf;
+  document.getElementById("pShelf").textContent = product.shelfLife;
 
+  // схожі товари: спочатку з тієї ж категорії, потім решта
   let related = [];
-
-  for (let i = 0; i < PRODUCTS.length; i++) {
-    if (PRODUCTS[i].id !== product.id && PRODUCTS[i].category === product.category) {
-      related.push(PRODUCTS[i]);
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].id !== product.id && products[i].category === product.category) {
+      related.push(products[i]);
     }
   }
-  for (let i = 0; i < PRODUCTS.length; i++) {
-    if (PRODUCTS[i].id !== product.id && PRODUCTS[i].category !== product.category) {
-      related.push(PRODUCTS[i]);
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].id !== product.id && products[i].category !== product.category) {
+      related.push(products[i]);
     }
   }
 
   let relatedBox = document.getElementById("relatedProducts");
   relatedBox.innerHTML = "";
-
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < related.length && i < 4; i++) {
     relatedBox.appendChild(createProductCard(related[i]));
+  }
+}
+
+function initProductPage() {
+  let statusBox = document.getElementById("productStatus");
+  let content = document.getElementById("productContent");
+
+  async function start() {
+    statusBox.textContent = "Завантаження товару…";
+    statusBox.hidden = false;
+    content.hidden = true;
+
+    try {
+      let products = await loadProducts();
+      let params = new URLSearchParams(window.location.search);
+      let product = null;
+
+      if (params.get("id") === null) {
+        // якщо id немає, показуємо перший товар
+        product = products[0];
+      } else {
+        let id = params.get("id");
+        for (let i = 0; i < products.length; i++) {
+          if (products[i].id === id) {
+            product = products[i];
+          }
+        }
+      }
+
+      if (!product) {
+        window.location.href = "404.html";
+        return;
+      }
+
+      showProduct(product, products);
+      statusBox.hidden = true;
+      content.hidden = false;
+    } catch (error) {
+      console.error("Помилка завантаження товару:", error);
+      showLoadError(statusBox, start);
+    }
   }
 
   // вкладки «Опис товару» і «Додаткова інформація»
@@ -530,10 +397,54 @@ function initProductPage() {
       qty.value = 1;
     }
   });
+
+  start();
+}
+// Головна сторінка: товари в блоці «Наші продукти»
+function initHomeProducts() {
+  let grid = document.getElementById("homeProducts");
+  let statusBox = document.getElementById("homeStatus");
+  let moreButton = document.getElementById("homeMore");
+
+  let products = [];
+  let shown = 0; 
+
+  function showMore(count) {
+    let end = Math.min(shown + count, products.length);
+
+    for (let i = shown; i < end; i++) {
+      grid.appendChild(createProductCard(products[i]));
+    }
+    shown = end;
+    moreButton.hidden = shown >= products.length;
+  }
+
+  async function start() {
+    statusBox.textContent = "Завантаження товарів…";
+    statusBox.hidden = false;
+
+    try {
+      products = await loadProducts();
+      statusBox.hidden = true;
+      showMore(8);
+    } catch (error) {
+      console.error("Помилка завантаження товарів:", error);
+      showLoadError(statusBox, start);
+    }
+  }
+
+  moreButton.addEventListener("click", function () {
+    showMore(4);
+  });
+
+  start();
 }
 
-if (document.querySelector(".shop-products .product-card")) {
-  linkShopCards();
+if (document.getElementById("homeProducts")) {
+  initHomeProducts();
+}
+if (document.getElementById("shopGrid")) {
+  initShopPage();
 }
 
 if (document.getElementById("pName")) {
