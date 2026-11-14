@@ -120,20 +120,56 @@ if (reviewImg && reviewDots.length) {
 }
 // Магазин
 
-// адреса, звідки беремо товари
-const PRODUCTS_URL = "assets/data/products.json";
+// дані підключення до Supabase (тільки Publishable key, секретний ключ сюди не можна)
+const SUPABASE_URL = "https://vfkngqwqkvhpmilmbmwo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_DDgY2svFqol0COtHIgMnaA_9_zmXdX9";
 
-// асинхронно завантажуємо список товарів
-async function loadProducts() {
-  let response = await fetch(PRODUCTS_URL);
+let db = null;
 
-  if (!response.ok) {
-    throw new Error("Сервер відповів з помилкою " + response.status);
+function getDb() {
+  if (db === null) {
+    db = createClient(SUPABASE_URL, SUPABASE_KEY);
   }
-
-  return await response.json();
+  return db;
 }
 
+// завантажуємо товари з бази даних
+async function loadProducts() {
+  // підключення до Supabase лежить в окремому файлі
+  let module = await import("./app.js");
+  let db = module.db;
+
+  let result = await db
+    .from("products")
+    .select("id, name, price, old_price, image, description, details, weight, origin, shelf_life, categories(name)")
+    .order("name");
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  // перетворюємо відповідь бази на поля, які використовує сайт
+  let products = [];
+  for (let i = 0; i < result.data.length; i++) {
+    let item = result.data[i];
+
+    products.push({
+      id: item.id,
+      name: item.name,
+      category: item.categories.name,
+      price: Number(item.price),
+      oldPrice: Number(item.old_price),
+      image: item.image,
+      description: item.description,
+      details: item.details,
+      weight: item.weight,
+      origin: item.origin,
+      shelfLife: item.shelf_life,
+    });
+  }
+
+  return products;
+}
 function formatPrice(value) {
   return "$" + value.toFixed(2);
 }
