@@ -677,6 +677,7 @@ h2 {
 }
 
 .modal-title {
+  padding: 0;
   font-size: 28px;
   font-weight: 700;
   color: var(--dark-color);
@@ -1189,6 +1190,49 @@ footer {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     outline: none;
   }
+
+  .modal-field[hidden] {
+  display: none;
+}
+
+.modal-message {
+  min-height: 20px;
+  font-size: 14px;
+  color: #525c60;
+}
+
+.modal-message.is-error {
+  color: #d93025;
+}
+
+.modal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.top-panel .auth-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.top-panel .auth-btn i {
+  color: #fff;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .top-panel .auth-btn {
+    width: 46px;
+    height: 46px;
+  }
+}
 /* ── ДЕСКТОП ── */
 @media (min-width: 768px) {
   .search-box {
