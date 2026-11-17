@@ -163,9 +163,10 @@ ul {
 
 .main-menu li a {
   color: var(--dark-color);
+  font-size: 20px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
 }
 
 .main-image {
@@ -1473,7 +1474,7 @@ footer {
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    font-size: 1.5em;
+    gap: 15px;
   }
  
   .main-menu li a {
@@ -1849,23 +1850,6 @@ footer {
 
   .footer-center {
     align-self: stretch;
-  }
-
-  .main-menu {
-    position: static;
-    width: auto;
-    height: auto;
-    flex: 1;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    background-color: transparent;
-    font-size: 1.5em;
-  }
-
-  .main-menu li {
-    margin: 0;
   }
 
   .main-menu li a {
