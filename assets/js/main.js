@@ -117,7 +117,6 @@ async function loadProducts() {
     throw result.error;
   }
 
-  // перетворюємо відповідь бази на поля, які використовує сайт
   let products = [];
   for (let i = 0; i < result.data.length; i++) {
     let item = result.data[i];
@@ -585,7 +584,7 @@ if (addToCartButton) {
     const password = passInput.value;
 
     if (!/^\S+@\S+\.\S+$/.test(email)) return setMessage("Введіть коректну пошту.", true);
-    if (password.length < 6) return setMessage("Пароль має містити щонайменше 6 символів.", true);
+    if (password.length < 8) return setMessage("Пароль має містити щонайменше 8 символів.", true);
     if (mode === "register" && password !== repeatInput.value) {
       return setMessage("Паролі не збігаються.", true);
     }
@@ -647,3 +646,23 @@ if (addToCartButton) {
   db.auth.onAuthStateChange((_event, session) => updateHeader(session));
 
 })();
+
+const newsletterForm = document.getElementById("newsletterForm");
+
+newsletterForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const input = document.getElementById("newsletterEmail");
+  const message = document.getElementById("newsletterMessage");
+  const email = input.value.trim();
+
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    message.textContent = "Введіть коректну електронну адресу.";
+    message.classList.add("is-error");
+    return;
+  }
+
+  message.textContent = "Дякуємо! Ви підписалися на розсилку.";
+  message.classList.remove("is-error");
+  newsletterForm.reset();
+});

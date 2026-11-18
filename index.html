@@ -411,10 +411,11 @@
         <div class="newsletter-text">
           <h2>Підпишіться на нашу розсилку</h2>
         </div>
-       <form class="newsletter-form" action="#" method="post">
- 
-  <input id="newsletterEmail" name="email" type="email" placeholder="Ваша електронна адреса" required />
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+  <input type="email" id="newsletterEmail" placeholder="Ваша електронна адреса" aria-label="Електронна адреса" />
   <button type="submit">Підписатися</button>
+  <p class="newsletter-message" id="newsletterMessage" role="status" aria-live="polite"></p>
+</form>
 </form>
       </section>
     </main>

@@ -1002,6 +1002,7 @@ h2 {
   justify-content: center;
   align-items: center;
   gap: 9px;
+  margin-top: auto;
 }
 .newsletter {
   position: relative;
@@ -1012,7 +1013,7 @@ h2 {
   justify-content: center;
   gap: 20px;
   margin: 20px auto;
-  padding: 30px;
+  padding: 20px;
   width: 70%;
 }
 
@@ -1043,13 +1044,13 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-
-  padding: 0 20px;
+  
 }
 
-.newsletter-form input {
-  max-width: 300px;
-  padding: 14px 20px;
+.newsletter .newsletter-form input {
+  min-width: 190px;
+  max-width: 350px;
+  padding: 14px 10px;
   border: none;
   border-radius: 8px;
   font-size: 12px;
@@ -1057,7 +1058,7 @@ h2 {
   font-style: italic;
 }
 
-.newsletter-form button {
+ .newsletter-form button {
   width: 120px;
   height: 50px;
   padding: 14px;
@@ -1067,6 +1068,19 @@ h2 {
   border-radius: 8px;
   font-size: 15px;
 }
+
+.newsletter-message {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.newsletter-message.is-error {
+  color: #d93025;
+}
+
 footer {
   border-top: 1px solid #dedddd;
 }
@@ -1470,6 +1484,7 @@ footer {
     flex-direction: row;
     justify-content: center;
     gap: 20px;
+    align-items: stretch;
   }
   .blog .subtitle {
     font-size: 36px;
@@ -1478,6 +1493,8 @@ footer {
   .blog-card {
     width: 340px;
     padding: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .blog-card img {
@@ -1486,6 +1503,9 @@ footer {
 
   .blog-content {
     width: 290px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
   
   .newsletter {
@@ -1856,7 +1876,14 @@ footer {
     font-size: 20px;
     border-radius: 20px;
   }
-
+.newsletter-message {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    margin-top: 8px;
+    font-size: 20px;
+  }
   .footer-content {
     flex-direction: row;
     align-items: center;

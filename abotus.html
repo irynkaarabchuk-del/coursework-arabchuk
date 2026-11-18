@@ -298,10 +298,11 @@
       </section>
       <section class="newsletter d-flex">
   <img src="assets/images/orange.webp" alt="Нарізані апельсини на блакитному фоні" />
-  <div class="newsletter-text">
-    <h2>Підпишіться на нашу розсилку</h2>
-  </div>
-  <form class="newsletter-form" action="#" method="post">
+  <form class="newsletter-form" id="newsletterForm" novalidate>
+  <input type="email" id="newsletterEmail" placeholder="Ваша електронна адреса" aria-label="Електронна адреса" />
+  <button type="submit">Підписатися</button>
+  <p class="newsletter-message" id="newsletterMessage" role="status" aria-live="polite"></p>
+</form>
  
   <input id="newsletterEmail" name="email" type="email" placeholder="Ваша електронна адреса" required />
   <button type="submit">Підписатися</button>
