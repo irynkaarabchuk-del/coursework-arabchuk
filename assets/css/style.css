@@ -1532,8 +1532,9 @@ footer {
   .menu-icon {
     display: none;
   }
-  .main-menu {
+    .main-menu {
     position: static;
+    height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -1544,6 +1545,7 @@ footer {
   .main-menu li a {
     color: var(--dark-color);
   }
+   
   .main-menu li {
     margin: 0;
   }

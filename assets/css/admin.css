@@ -1,0 +1,181 @@
+.admin,
+.admin * {
+  box-sizing: border-box;
+}
+
+.admin {
+  width: calc(100% - 32px);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+  font-family: var(--secondary-font);
+  color: var(--dark-color);
+}
+
+.admin-title {
+  margin-bottom: 24px;
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.admin-subtitle {
+  padding: 0;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.admin-status {
+  text-align: center;
+  font-size: 16px;
+}
+
+.admin-status button {
+  display: block;
+  margin: 16px auto 0;
+}
+
+.admin [hidden] {
+  display: none;
+}
+
+.admin-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #f9f8f8;
+}
+
+.admin-form label {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea,
+.admin-search {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dedddd;
+  border-radius: 10px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--dark-color);
+}
+
+.admin-form textarea {
+  resize: vertical;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.admin-row div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-message {
+  min-height: 20px;
+  font-size: 14px;
+  color: var(--secondary-color);
+}
+
+.admin-message.is-error {
+  color: #d9534f;
+}
+
+.admin-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.admin-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--dark-color);
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.admin-btn-light {
+  background: #e3e3e3;
+  color: var(--dark-color);
+}
+
+.admin-btn-danger {
+  background: #d9534f;
+}
+
+.admin-search {
+  margin-bottom: 16px;
+}
+
+/* на телефоні таблицю можна гортати вбік */
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-table img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.admin-table td:last-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 69px;
+}
+
+@media (min-width: 1024px) {
+    .main-menu {
+    width: 80px;
+}
+  .admin-panel {
+    grid-template-columns: 400px minmax(0, 1fr);
+    align-items: start;
+  }
+}
