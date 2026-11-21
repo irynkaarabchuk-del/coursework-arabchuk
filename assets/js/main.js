@@ -1,4 +1,5 @@
 // пошук в мобільній версії
+let currentProduct = null;
 let searchForm = document.querySelector(".search-box");
 let searchButton = document.querySelector(".search-btn");
 let headerSearchInput = document.getElementById("headerSearch");
@@ -307,6 +308,7 @@ function initShopPage() {
 
 // Сторінка одного товару
 function showProduct(product, products) {
+  currentProduct = product;
   document.title = product.name + " — Organick";
   document.getElementById("pImage").src = product.image;
   document.getElementById("pImage").alt = product.name;
@@ -454,35 +456,6 @@ if (document.getElementById("shopGrid")) {
 
 if (document.getElementById("pName")) {
   initProductPage();
-}
-
-
-// Кошик
-let cartText = document.querySelector(".cart-box span");
-let cartCount = Number(localStorage.getItem("cartCount")) || 0;
-
-function showCartCount() {
-  if (cartText) {
-    cartText.textContent = "Кошик (" + cartCount + ")";
-  }
-}
-
-showCartCount();
-
-let addToCartButton = document.querySelector(".single-cart-btn");
-
-if (addToCartButton) {
-  addToCartButton.addEventListener("click", function () {
-    let qty = Number(document.getElementById("qty").value);
-
-    if (qty < 1) {
-      qty = 1;
-    }
-
-    cartCount = cartCount + qty;
-    localStorage.setItem("cartCount", cartCount);
-    showCartCount();
-  });
 }
 
 // Авторизація: вхід і реєстрація
@@ -960,3 +933,152 @@ async function initAdminPage() {
 if (document.getElementById("adminPanel")) {
   initAdminPage();
 }
+
+// Кошик
+let cartItems = [];
+try {
+  cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+} catch {
+  cartItems = [];
+}
+
+function saveCart() {
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+}
+
+function getCartCount() {
+  return cartItems.reduce((sum, item) => sum + item.qty, 0);
+}
+
+function getCartTotal() {
+  return cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+function addToCart(product, qty) {
+  const existing = cartItems.find((item) => String(item.id) === String(product.id));
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cartItems.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      qty: qty,
+    });
+  }
+  saveCart();
+  renderCart();
+}
+
+const cartOverlay = document.createElement("div");
+cartOverlay.className = "modal-overlay";
+cartOverlay.id = "cartOverlay";
+cartOverlay.innerHTML = `
+  <div class="modal cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <button type="button" class="modal-close" id="cartClose" aria-label="Закрити">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <h2 class="modal-title" id="cartTitle">Кошик</h2>
+    <ul class="cart-list" id="cartList"></ul>
+    <p class="cart-total" id="cartTotal"></p>
+    <button type="button" class="modal-btn" id="cartClear">Очистити кошик</button>
+  </div>`;
+document.body.append(cartOverlay);
+
+const cartList = document.getElementById("cartList");
+const cartTotalBox = document.getElementById("cartTotal");
+const cartClearBtn = document.getElementById("cartClear");
+const cartText = document.querySelector(".cart-box span");
+
+function renderCart() {
+  cartList.replaceChildren();
+
+  if (cartItems.length === 0) {
+    cartList.append(createElement("li", "cart-empty", "Кошик порожній."));
+  }
+
+  for (const item of cartItems) {
+    const li = createElement("li", "cart-item");
+
+    if (item.image) {
+      const img = document.createElement("img");
+      img.src = item.image;
+      img.alt = item.name;
+      li.append(img);
+    }
+
+    const info = createElement("div", "cart-item-info");
+    info.append(createElement("div", "cart-item-name", item.name));
+    info.append(
+      createElement(
+        "div",
+        "cart-item-sum",
+        item.qty + " × " + formatPrice(item.price) + " = " + formatPrice(item.qty * item.price)
+      )
+    );
+    li.append(info);
+
+    const removeBtn = createElement("button", "cart-remove", "Видалити");
+    removeBtn.type = "button";
+    removeBtn.addEventListener("click", () => {
+      cartItems = cartItems.filter((other) => String(other.id) !== String(item.id));
+      saveCart();
+      renderCart();
+    });
+    li.append(removeBtn);
+
+    cartList.append(li);
+  }
+
+  cartTotalBox.textContent = "Разом: " + formatPrice(getCartTotal());
+  cartTotalBox.hidden = cartItems.length === 0;
+  cartClearBtn.hidden = cartItems.length === 0;
+
+  if (cartText) {
+    cartText.textContent = "Кошик (" + getCartCount() + ")";
+  }
+}
+
+function openCart() {
+  renderCart();
+  cartOverlay.classList.add("active");
+}
+
+function closeCart() {
+  cartOverlay.classList.remove("active");
+}
+
+document.querySelector(".cart-box")?.addEventListener("click", openCart);
+document.getElementById("cartClose").addEventListener("click", closeCart);
+cartOverlay.addEventListener("click", (event) => {
+  if (event.target === cartOverlay) closeCart();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeCart();
+});
+
+cartClearBtn.addEventListener("click", () => {
+  cartItems = [];
+  saveCart();
+  renderCart();
+});
+
+document.querySelector(".single-cart-btn")?.addEventListener("click", (event) => {
+  if (!currentProduct) return;
+
+  let qty = Number(document.getElementById("qty").value);
+  if (!qty || qty < 1) qty = 1;
+
+  addToCart(currentProduct, qty);
+
+  // коротке підтвердження на кнопці, бо кошик тепер не відкривається
+  const button = event.currentTarget;
+  const oldText = button.textContent;
+  button.textContent = "Додано";
+  setTimeout(() => {
+    button.textContent = oldText;
+  }, 1200);
+});
+
+renderCart();
