@@ -863,6 +863,8 @@ async function initAdminPage() {
     const { data } = await db.auth.getSession();
     const token = data.session?.access_token;
 
+
+
     const response = await fetch(API_URL + path, {
       method: method,
       headers: {

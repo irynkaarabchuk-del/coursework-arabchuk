@@ -6,6 +6,7 @@ async function requireAdmin(req, res, next) {
   if (!token) return res.status(401).json({ error: "Потрібен вхід." });
 
   const { data: userData, error: userError } = await supabase.auth.getUser(token);
+  console.log("getUser error:", userError?.message, "| token start:", token.slice(0, 15));
   if (userError || !userData.user) {
     return res.status(401).json({ error: "Недійсний токен." });
   }
@@ -16,10 +17,12 @@ async function requireAdmin(req, res, next) {
     .eq("id", userData.user.id)
     .maybeSingle();
 
+  console.log("user:", userData.user.email, userData.user.id);
+  console.log("profile:", profile, "error:", profileError);
+
   if (profileError || !profile || profile.role !== "admin") {
     return res.status(403).json({ error: "Немає прав адміністратора." });
   }
-
   req.user = userData.user;
   next();
 }

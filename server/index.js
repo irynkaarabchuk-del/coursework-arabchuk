@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 const express = require("express");
 const cors = require("cors");
 const routes = require("./routes/routes");
@@ -14,4 +14,12 @@ routes(app);
 
 app.listen(port, () => {
   console.log("Сервер запущено на порту " + port);
+});
+app.use((request, response) => {
+  response.status(404).json({ error: "Маршрут не знайдено." });
+});
+
+app.use((error, request, response, next) => {
+  console.error("Помилка сервера:", error);
+  response.status(500).json({ error: "Внутрішня помилка сервера." });
 });
