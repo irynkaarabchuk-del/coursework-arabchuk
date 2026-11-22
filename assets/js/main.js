@@ -1,3 +1,5 @@
+const API_URL = "http://localhost:3002";
+
 // пошук в мобільній версії
 let currentProduct = null;
 let searchForm = document.querySelector(".search-box");
@@ -857,7 +859,24 @@ async function initAdminPage() {
       shelf_life: value("fShelf") || null,
     };
   }
+  async function adminRequest(method, path, body) {
+    const { data } = await db.auth.getSession();
+    const token = data.session?.access_token;
 
+    const response = await fetch(API_URL + path, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || "Помилка сервера.");
+    return result;
+  }
+  
   // CREATE і UPDATE
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -874,18 +893,11 @@ async function initAdminPage() {
     saveBtn.disabled = true;
     setMessage("Збереження…");
 
-    try {
-      let result;
+        try {
       if (id) {
-        result = await db.from("products").update(product).eq("id", id).select();
+        await adminRequest("PUT", "/api/products/" + id, product);
       } else {
-        result = await db.from("products").insert(product).select();
-      }
-
-      if (result.error) throw result.error;
-      // якщо база нічого не змінила, найчастіше це означає, що немає прав
-      if (!result.data || result.data.length === 0) {
-        throw new Error("Немає прав на зміну або товар не знайдено.");
+        await adminRequest("POST", "/api/products", product);
       }
 
       setMessage(id ? "Зміни збережено." : "Товар додано.");
@@ -900,26 +912,19 @@ async function initAdminPage() {
   });
 
   // DELETE
-  async function deleteProduct(product) {
+    async function deleteProduct(product) {
     if (!confirm("Видалити товар «" + product.name + "»?")) return;
 
-    const { data, error } = await db.from("products").delete().eq("id", product.id).select();
-
-    if (error || !data || data.length === 0) {
+    try {
+      await adminRequest("DELETE", "/api/products/" + product.id);
+      setMessage("Товар видалено.");
+      if (document.getElementById("productId").value == product.id) resetForm();
+      await loadAdminProducts();
+    } catch (error) {
       console.error("Помилка видалення:", error);
-      setMessage("Не вдалося видалити товар.", true);
-      return;
+      setMessage("Не вдалося видалити товар: " + error.message, true);
     }
-
-    setMessage("Товар видалено.");
-    if (document.getElementById("productId").value == product.id) resetForm();
-    await loadAdminProducts();
   }
-
-  cancelBtn.addEventListener("click", () => {
-    resetForm();
-    setMessage("");
-  });
 
 
   // перевіряємо доступ при відкритті сторінки, вході та виході
