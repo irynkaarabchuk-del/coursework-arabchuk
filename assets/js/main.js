@@ -1,6 +1,3 @@
-const API_URL = "http://localhost:3002";
-
-// пошук в мобільній версії
 let currentProduct = null;
 let searchForm = document.querySelector(".search-box");
 let searchButton = document.querySelector(".search-btn");
@@ -91,13 +88,11 @@ function showReview(index) {
   reviewName.textContent = review.name;
   reviewRole.textContent = review.role;
 
-  // підсвічуємо тільки той кружечок, на який натиснули
   for (let i = 0; i < reviewDots.length; i++) {
     reviewDots[i].classList.toggle("active", i === index);
   }
 }
 
-// працює тільки там, де є блок відгуків (головна сторінка)
 if (reviewImg && reviewDots.length) {
   for (let i = 0; i < reviewDots.length; i++) {
     reviewDots[i].addEventListener("click", function () {
@@ -109,7 +104,6 @@ if (reviewImg && reviewDots.length) {
 
 // завантажуємо товари з бази даних
 async function loadProducts() {
-  // підключення до Supabase лежить в окремому файлі
   let module = await import("./app.js");
   let db = module.db;
 
@@ -308,7 +302,6 @@ function initShopPage() {
   start();
 }
 
-// Сторінка одного товару
 function showProduct(product, products) {
   currentProduct = product;
   document.title = product.name + " — Organick";
@@ -325,7 +318,7 @@ function showProduct(product, products) {
   document.getElementById("pCategory").textContent = product.category;
   document.getElementById("pShelf").textContent = product.shelfLife;
 
-  // схожі товари: спочатку з тієї ж категорії, потім решта
+  // схожі товари
   let related = [];
   for (let i = 0; i < products.length; i++) {
     if (products[i].id !== product.id && products[i].category === product.category) {
@@ -360,7 +353,6 @@ function initProductPage() {
       let product = null;
 
       if (params.get("id") === null) {
-        // якщо id немає, показуємо перший товар
         product = products[0];
       } else {
         let id = params.get("id");
@@ -385,7 +377,6 @@ function initProductPage() {
     }
   }
 
-  // вкладки «Опис товару» і «Додаткова інформація»
   let tabButtons = document.querySelectorAll(".tab-btn");
   let tabContents = document.querySelectorAll(".tab-content");
 
@@ -400,38 +391,12 @@ function initProductPage() {
     });
   }
 
-
-
-  function fixQty() {
-    let value = Math.floor(Number(qty.value));
-    if (!value || value < 1) value = 1;
-    if (value > 100) value = 100;
-    qty.value = value;
-  }
-
-    let qty = document.getElementById("qty");
-  let qtyError = document.getElementById("qtyError");
-
-  function checkQty() {
-    let text = qty.value.trim();
-    let number = Number(text);
-
-    if (text === "") return "Введіть кількість від 1 до 100.";
-    if (!Number.isInteger(number)) return "Кількість має бути цілим числом.";
-    if (number < 1) return "Мінімальна кількість: 1.";
-    if (number > 100) return "Максимальна кількість: 100.";
-    return "";
-  }
-
-  function showQtyError() {
-    let text = checkQty();
-    qtyError.textContent = text;
-    qtyError.hidden = text === "";
-    qty.classList.toggle("is-invalid", text !== "");
-    return text === "";
-  }
-
-  qty.addEventListener("input", showQtyError);
+  let qty = document.getElementById("qty");
+  qty.addEventListener("change", function () {
+    if (qty.value === "" || Number(qty.value) < 1) {
+      qty.value = 1;
+    }
+  });
 
   start();
 }
@@ -486,487 +451,6 @@ if (document.getElementById("pName")) {
   initProductPage();
 }
 
-// Авторизація: вхід і реєстрація
-(async function () {
-  const { db } = await import("./app.js");
-  let mode = "login";
-  const overlay = document.createElement("div");
-  overlay.className = "modal-overlay";
-  overlay.id = "authOverlay";
-  overlay.innerHTML = `
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-      <button type="button" class="modal-close" id="authClose" aria-label="Закрити">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <h2 class="modal-title" id="authTitle">Увійти</h2>
-      <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
-      <form class="modal-form" id="authForm" novalidate>
-        <div class="modal-field">
-          <label for="authEmail">Електронна пошта</label>
-          <input id="authEmail" type="email" autocomplete="email" placeholder="Введіть вашу пошту" />
-        </div>
-        <div class="modal-field">
-          <label for="authPassword">Пароль</label>
-          <input id="authPassword" type="password" autocomplete="current-password" placeholder="Введіть ваш пароль" />
-        </div>
-        <div class="modal-field" id="authRepeatField" hidden>
-          <label for="authRepeat">Повторіть пароль</label>
-          <input id="authRepeat" type="password" autocomplete="off" placeholder="Повторіть пароль" />
-        </div>
-        <p class="modal-message" id="authMessage" role="status" aria-live="polite"></p>
-        <button type="submit" class="modal-btn" id="authSubmit">Увійти</button>
-      </form>
-      <p class="modal-register">
-        <span id="authSwitchText">Немає акаунту?</span>
-        <a href="#" id="authSwitch">Зареєструйтесь</a>
-      </p>
-    </div>`;
-  document.body.prepend(overlay);
-
-  const $ = (id) => document.getElementById(id);
-  const form = $("authForm");
-  const emailInput = $("authEmail");
-  const passInput = $("authPassword");
-  const repeatInput = $("authRepeat");
-  const repeatField = $("authRepeatField");
-  const message = $("authMessage");
-  const submitBtn = $("authSubmit");
-
-
-  // іконка в шапці
-  const authBtn = document.createElement("button");
-  authBtn.type = "button";
-  authBtn.className = "auth-btn";
-  authBtn.id = "authBtn";
-  authBtn.setAttribute("aria-label", "Увійти");
-  authBtn.innerHTML = '<i class="fa-solid fa-user" aria-hidden="true"></i>';
-  (document.querySelector(".top-panel") || document.querySelector(".navbar")).append(authBtn);
-
-  function setMessage(text, isError = false) {
-    message.textContent = text;
-    message.classList.toggle("is-error", isError);
-  }
-
-  function setMode(newMode) {
-    mode = newMode;
-    const isLogin = mode === "login";
-    $("authTitle").textContent = isLogin ? "Увійти" : "Реєстрація";
-    submitBtn.textContent = isLogin ? "Увійти" : "Зареєструватися";
-    repeatField.hidden = isLogin;
-    passInput.autocomplete = "current-password";
-    $("authSwitchText").textContent = isLogin ? "Немає акаунту?" : "Вже є акаунт?";
-    $("authSwitch").textContent = isLogin ? "Зареєструйтесь" : "Увійдіть";
-    setMessage("");
-  }
-
-  function openModal() {
-    form.reset();
-    setMode("login");
-    overlay.classList.add("active");
-    emailInput.focus();
-  }
-
-  function closeModal() {
-    overlay.classList.remove("active");
-  }
-
-  function errorText(err) {
-    const m = (err.message || "").toLowerCase();
-    if (m.includes("invalid login")) return "Невірна пошта або пароль.";
-    if (m.includes("already registered")) return "Користувач з такою поштою вже існує.";
-    if (m.includes("email not confirmed")) return "Підтвердіть пошту за листом.";
-    if (m.includes("rate limit")) return "Забагато спроб. Спробуйте пізніше.";
-    if (m.includes("password")) return "Пароль має містити щонайменше 6 символів.";
-    return "Сталася помилка. Спробуйте ще раз.";
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = emailInput.value.trim();
-    const password = passInput.value;
-
-    if (!/^\S+@\S+\.\S+$/.test(email)) return setMessage("Введіть коректну пошту.", true);
-    if (password.length < 8) return setMessage("Пароль має містити щонайменше 8 символів.", true);
-    if (mode === "register" && password !== repeatInput.value) {
-      return setMessage("Паролі не збігаються.", true);
-    }
-
-    submitBtn.disabled = true;
-    setMessage(mode === "login" ? "Вхід..." : "Реєстрація...");
-
-    try {
-      if (mode === "login") {
-        const { error } = await db.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        closeModal();
-      } else {
-        const { data, error } = await db.auth.signUp({ email, password });
-        if (error) throw error;
-        if (data.session) {
-          closeModal();
-        } else {
-          setMessage("Акаунт створено. Перевірте пошту, щоб підтвердити реєстрацію.");
-        }
-      }
-    } catch (err) {
-      console.error("Помилка авторизації:", err);
-      setMessage(errorText(err), true);
-    } finally {
-      submitBtn.disabled = false;
-    }
-  });
-
-  $("authSwitch").addEventListener("click", (e) => {
-    e.preventDefault();
-    setMode(mode === "login" ? "register" : "login");
-  });
-
-  $("authClose").addEventListener("click", closeModal);
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closeModal();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-  });
-
-  // кнопка в шапці: увійти або вийти
-  let loggedIn = false;
-  authBtn.addEventListener("click", async () => {
-    if (!loggedIn) return openModal();
-    const { error } = await db.auth.signOut();
-    if (error) console.error("Помилка виходу:", error);
-  });
-
-   function updateHeader(session) {
-    loggedIn = Boolean(session);
-    const icon = authBtn.querySelector("i");
-    icon.className = loggedIn ? "fa-solid fa-right-from-bracket" : "fa-solid fa-user";
-    authBtn.setAttribute("aria-label", loggedIn ? "Вийти" : "Увійти");
-    authBtn.title = loggedIn ? "Вийти (" + session.user.email + ")" : "Увійти";
-  }
-   // посилання на адмін-панель у меню бачить тільки адмін
-  async function updateAdminLink(session) {
-    let isAdmin = false;
-
-    if (session) {
-      const { data, error } = await db
-        .from("profiles")
-        .select("role")
-        .eq("id", session.user.id)
-        .maybeSingle();
-
-      if (error) console.error("Помилка перевірки ролі:", error);
-      isAdmin = Boolean(data && data.role === "admin");
-    }
-
-    const menu = document.getElementById("mainMenu");
-    let link = document.getElementById("adminLink");
-
-    if (isAdmin && !link && menu) {
-      link = document.createElement("li");
-      link.id = "adminLink";
-      link.innerHTML = '<a href="admin.html">Адмін</a>';
-      menu.appendChild(link);
-    }
-
-    if (!isAdmin && link) {
-      link.remove();
-    }
-  }
-
-  db.auth.getSession().then(({ data }) => updateHeader(data.session));
-  db.auth.onAuthStateChange((_event, session) => {
-    updateHeader(session);
-    updateAdminLink(session);
-  });
-
-})();
-
-// Адмін-панель 
-async function initAdminPage() {
-  const { db } = await import("./app.js");
-
-  const statusBox = document.getElementById("adminStatus");
-  const panel = document.getElementById("adminPanel");
-  const form = document.getElementById("productForm");
-  const formTitle = document.getElementById("formTitle");
-  const message = document.getElementById("formMessage");
-  const saveBtn = document.getElementById("saveBtn");
-  const cancelBtn = document.getElementById("cancelBtn");
-  const rows = document.getElementById("productRows");
-  const countBox = document.getElementById("productCount");
-  const categorySelect = document.getElementById("fCategory");
-
-  let adminProducts = [];
-
-  function setMessage(text, isError = false) {
-    message.textContent = text;
-    message.classList.toggle("is-error", isError);
-  }
-
-  // повідомлення замість панелі 
-  function showStatus(text, withLoginButton = false) {
-    panel.hidden = true;
-    statusBox.hidden = false;
-    statusBox.textContent = text;
-
-    if (withLoginButton) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "admin-btn";
-      button.textContent = "Увійти";
-      // кнопка входу в шапці відкриває вікно авторизації
-      button.addEventListener("click", () => document.getElementById("authBtn")?.click());
-      statusBox.appendChild(button);
-    }
-  }
-
-  //пускаємо тільки залогіненого користувача з роллю admin
-  async function checkAccess(session) {
-    if (!session) {
-      showStatus("Адмін-панель доступна лише після входу.", true);
-      return;
-    }
-
-    showStatus("Перевірка доступу…");
-
-    const { data, error } = await db
-      .from("profiles")
-      .select("role")
-      .eq("id", session.user.id)
-      .maybeSingle();
-
-    if (error) {
-      console.error("Помилка перевірки прав:", error);
-      showStatus("Не вдалося перевірити права доступу. Спробуйте оновити сторінку.");
-      return;
-    }
-
-    if (!data || data.role !== "admin") {
-      showStatus("У вас немає прав адміністратора.");
-      return;
-    }
-
-    statusBox.hidden = true;
-    panel.hidden = false;
-    await loadCategories();
-    await loadAdminProducts();
-  }
-
-  async function loadCategories() {
-    const { data, error } = await db.from("categories").select("id, name").order("name");
-
-    if (error) {
-      console.error("Помилка завантаження категорій:", error);
-      setMessage("Не вдалося завантажити категорії.", true);
-      return;
-    }
-
-    categorySelect.innerHTML = "";
-    for (const category of data) {
-      const option = document.createElement("option");
-      option.value = category.id;
-      option.textContent = category.name;
-      categorySelect.appendChild(option);
-    }
-  }
-
-  async function loadAdminProducts() {
-    rows.innerHTML = '<tr><td colspan="5">Завантаження…</td></tr>';
-
-    const { data, error } = await db
-      .from("products")
-      .select("id, name, price, old_price, image_url, description, details, weight, origin, shelf_life, category_id, categories(name)")
-      .order("name");
-
-    if (error) {
-      console.error("Помилка завантаження товарів:", error);
-      rows.innerHTML = '<tr><td colspan="5">Не вдалося завантажити товари.</td></tr>';
-      return;
-    }
-
-    adminProducts = data;
-    renderRows();
-  }
-
-  function renderRows() {
- const visible = adminProducts;
-
-    countBox.textContent = adminProducts.length;
-    rows.innerHTML = "";
-
-    if (visible.length === 0) {
-      rows.innerHTML = '<tr><td colspan="5">Нічого не знайдено.</td></tr>';
-      return;
-    }
-
-    for (const product of visible) {
-      const tr = document.createElement("tr");
-
-      const imageCell = document.createElement("td");
-      const image = document.createElement("img");
-      image.src = product.image_url || "";
-      image.alt = product.name;
-      imageCell.appendChild(image);
-
-      const nameCell = document.createElement("td");
-      nameCell.textContent = product.name;
-
-      const categoryCell = document.createElement("td");
-      categoryCell.textContent = product.categories ? product.categories.name : "—";
-
-      const priceCell = document.createElement("td");
-      priceCell.textContent = "$" + Number(product.price).toFixed(2);
-
-      const actionsCell = document.createElement("td");
-
-      const editBtn = document.createElement("button");
-      editBtn.type = "button";
-      editBtn.className = "admin-btn admin-btn-light";
-      editBtn.textContent = "Редагувати";
-      editBtn.addEventListener("click", () => startEdit(product));
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.type = "button";
-      deleteBtn.className = "admin-btn admin-btn-danger";
-      deleteBtn.textContent = "Видалити";
-      deleteBtn.addEventListener("click", () => deleteProduct(product));
-
-      actionsCell.append(editBtn, deleteBtn);
-      tr.append(imageCell, nameCell, categoryCell, priceCell, actionsCell);
-      rows.appendChild(tr);
-    }
-  }
-
-  // заповнюємо форму даними товару для редагування
-  function startEdit(product) {
-    document.getElementById("productId").value = product.id;
-    document.getElementById("fName").value = product.name;
-    categorySelect.value = product.category_id;
-    document.getElementById("fPrice").value = product.price;
-    document.getElementById("fOldPrice").value = product.old_price ?? "";
-    document.getElementById("fImage").value = product.image_url ?? "";
-    document.getElementById("fDescription").value = product.description ?? "";
-    document.getElementById("fDetails").value = product.details ?? "";
-    document.getElementById("fWeight").value = product.weight ?? "";
-    document.getElementById("fOrigin").value = product.origin ?? "";
-    document.getElementById("fShelf").value = product.shelf_life ?? "";
-
-    formTitle.textContent = "Редагування товару";
-    saveBtn.textContent = "Зберегти зміни";
-    cancelBtn.hidden = false;
-    setMessage("");
-    form.scrollIntoView({ behavior: "smooth" });
-  }
-
-  function resetForm() {
-    form.reset();
-    document.getElementById("productId").value = "";
-    formTitle.textContent = "Новий товар";
-    saveBtn.textContent = "Додати товар";
-    cancelBtn.hidden = true;
-  }
-
-  // збираємо дані з форми в обʼєкт для бази
-  function readForm() {
-    const value = (id) => document.getElementById(id).value.trim();
-    const oldPrice = value("fOldPrice");
-
-    return {
-      name: value("fName"),
-      category_id: Number(categorySelect.value),
-      price: Number(value("fPrice")),
-      old_price: oldPrice === "" ? null : Number(oldPrice),
-      image_url: value("fImage") || null,
-      description: value("fDescription") || null,
-      details: value("fDetails") || null,
-      weight: value("fWeight") || null,
-      origin: value("fOrigin") || null,
-      shelf_life: value("fShelf") || null,
-    };
-  }
-  async function adminRequest(method, path, body) {
-    const { data } = await db.auth.getSession();
-    const token = data.session?.access_token;
-
-
-
-    const response = await fetch(API_URL + path, {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
-
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || "Помилка сервера.");
-    return result;
-  }
-  
-  // CREATE і UPDATE
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const product = readForm();
-    const id = document.getElementById("productId").value;
-
-    if (product.name === "") return setMessage("Введіть назву товару.", true);
-    if (document.getElementById("fPrice").value === "" || product.price < 0) {
-      return setMessage("Введіть коректну ціну.", true);
-    }
-    if (!product.category_id) return setMessage("Оберіть категорію.", true);
-
-    saveBtn.disabled = true;
-    setMessage("Збереження…");
-
-        try {
-      if (id) {
-        await adminRequest("PUT", "/api/products/" + id, product);
-      } else {
-        await adminRequest("POST", "/api/products", product);
-      }
-
-      setMessage(id ? "Зміни збережено." : "Товар додано.");
-      resetForm();
-      await loadAdminProducts();
-    } catch (error) {
-      console.error("Помилка збереження:", error);
-      setMessage("Не вдалося зберегти товар: " + error.message, true);
-    } finally {
-      saveBtn.disabled = false;
-    }
-  });
-
-  // DELETE
-    async function deleteProduct(product) {
-    if (!confirm("Видалити товар «" + product.name + "»?")) return;
-
-    try {
-      await adminRequest("DELETE", "/api/products/" + product.id);
-      setMessage("Товар видалено.");
-      if (document.getElementById("productId").value == product.id) resetForm();
-      await loadAdminProducts();
-    } catch (error) {
-      console.error("Помилка видалення:", error);
-      setMessage("Не вдалося видалити товар: " + error.message, true);
-    }
-  }
-
-
-  // перевіряємо доступ при відкритті сторінки, вході та виході
-  db.auth.onAuthStateChange((event, session) => {
-    if (event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "SIGNED_OUT") {
-      setTimeout(() => checkAccess(session), 0);
-    }
-  });
-}
-
-if (document.getElementById("adminPanel")) {
-  initAdminPage();
-}
-
 // Кошик
 let cartItems = [];
 try {
@@ -1015,8 +499,6 @@ cartOverlay.innerHTML = `
     <h2 class="modal-title" id="cartTitle">Кошик</h2>
     <ul class="cart-list" id="cartList"></ul>
     <p class="cart-total" id="cartTotal"></p>
-    <p class="cart-pay-message" id="cartPayMessage" role="status" aria-live="polite"></p>
-    <button type="button" class="modal-btn" id="cartBuy">Купити</button>
     <button type="button" class="modal-btn" id="cartClear">Очистити кошик</button>
   </div>`;
 document.body.append(cartOverlay);
@@ -1024,8 +506,6 @@ document.body.append(cartOverlay);
 const cartList = document.getElementById("cartList");
 const cartTotalBox = document.getElementById("cartTotal");
 const cartClearBtn = document.getElementById("cartClear");
-const cartBuyBtn = document.getElementById("cartBuy");
-const cartPayMessage = document.getElementById("cartPayMessage");
 const cartText = document.querySelector(".cart-box span");
 
 function renderCart() {
@@ -1071,15 +551,13 @@ function renderCart() {
   cartTotalBox.textContent = "Разом: " + formatPrice(getCartTotal());
   cartTotalBox.hidden = cartItems.length === 0;
   cartClearBtn.hidden = cartItems.length === 0;
-  cartBuyBtn.hidden = cartItems.length === 0;
-  if (cartItems.length === 0) cartPayMessage.textContent = "";
+
   if (cartText) {
     cartText.textContent = "Кошик (" + getCartCount() + ")";
   }
 }
 
 function openCart() {
-  cartPayMessage.textContent = "";
   renderCart();
   cartOverlay.classList.add("active");
 }
@@ -1106,13 +584,11 @@ cartClearBtn.addEventListener("click", () => {
 document.querySelector(".single-cart-btn")?.addEventListener("click", (event) => {
   if (!currentProduct) return;
 
- let qty = Number(document.getElementById("qty").value);
+  let qty = Number(document.getElementById("qty").value);
   if (!qty || qty < 1) qty = 1;
-  if (qty > 100) qty = 100;
 
   addToCart(currentProduct, qty);
 
-  // коротке підтвердження на кнопці, бо кошик тепер не відкривається
   const button = event.currentTarget;
   const oldText = button.textContent;
   button.textContent = "Додано";
@@ -1120,34 +596,5 @@ document.querySelector(".single-cart-btn")?.addEventListener("click", (event) =>
     button.textContent = oldText;
   }, 1200);
 });
-  cartBuyBtn.addEventListener("click", () => {
-  if (cartItems.length === 0) return;
 
-  if (confirm("Ви точно хочете купити?")) {
-    cartPayMessage.textContent = "Оплачено! Дякуємо за покупку.";
-  }
-});
 renderCart();
-
-// Розсилка
-const newsletterForm = document.getElementById("newsletterForm");
-
-if (newsletterForm) {
-  const newsletterEmail = document.getElementById("newsletterEmail");
-  const newsletterMessage = document.getElementById("newsletterMessage");
-
-  newsletterForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const email = newsletterEmail.value.trim();
-
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      newsletterMessage.textContent = "Введіть коректну електронну адресу.";
-      newsletterMessage.classList.add("error");
-      return;
-    }
-
-    newsletterMessage.textContent = "Дякуємо! Ви підписались на розсилку.";
-    newsletterMessage.classList.remove("error");
-    newsletterForm.reset();
-  });
-}
