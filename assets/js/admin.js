@@ -1,4 +1,3 @@
-// Адмін-панель: CRUD товарів через Express-сервер
 import { db } from "./app.js";
 const API_URL = "http://localhost:3002";
 
@@ -21,8 +20,7 @@ function initAdminPage() {
     message.textContent = text;
     message.classList.toggle("is-error", isError);
   }
-
-  // повідомлення замість панелі 
+ 
   function showStatus(text, withLoginButton = false) {
     panel.hidden = true;
     statusBox.hidden = false;
@@ -33,13 +31,11 @@ function initAdminPage() {
       button.type = "button";
       button.className = "admin-btn";
       button.textContent = "Увійти";
-      // кнопка входу в шапці відкриває вікно авторизації
       button.addEventListener("click", () => document.getElementById("authBtn")?.click());
       statusBox.appendChild(button);
     }
   }
 
-  //пускаємо тільки залогіненого користувача з роллю admin
   async function checkAccess(session) {
     if (!session) {
       showStatus("Адмін-панель доступна лише після входу.", true);
