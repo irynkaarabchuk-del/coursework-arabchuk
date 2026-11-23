@@ -1015,6 +1015,8 @@ cartOverlay.innerHTML = `
     <h2 class="modal-title" id="cartTitle">Кошик</h2>
     <ul class="cart-list" id="cartList"></ul>
     <p class="cart-total" id="cartTotal"></p>
+    <p class="cart-pay-message" id="cartPayMessage" role="status" aria-live="polite"></p>
+    <button type="button" class="modal-btn" id="cartBuy">Купити</button>
     <button type="button" class="modal-btn" id="cartClear">Очистити кошик</button>
   </div>`;
 document.body.append(cartOverlay);
@@ -1022,6 +1024,8 @@ document.body.append(cartOverlay);
 const cartList = document.getElementById("cartList");
 const cartTotalBox = document.getElementById("cartTotal");
 const cartClearBtn = document.getElementById("cartClear");
+const cartBuyBtn = document.getElementById("cartBuy");
+const cartPayMessage = document.getElementById("cartPayMessage");
 const cartText = document.querySelector(".cart-box span");
 
 function renderCart() {
@@ -1067,13 +1071,15 @@ function renderCart() {
   cartTotalBox.textContent = "Разом: " + formatPrice(getCartTotal());
   cartTotalBox.hidden = cartItems.length === 0;
   cartClearBtn.hidden = cartItems.length === 0;
-
+  cartBuyBtn.hidden = cartItems.length === 0;
+  if (cartItems.length === 0) cartPayMessage.textContent = "";
   if (cartText) {
     cartText.textContent = "Кошик (" + getCartCount() + ")";
   }
 }
 
 function openCart() {
+  cartPayMessage.textContent = "";
   renderCart();
   cartOverlay.classList.add("active");
 }
@@ -1114,7 +1120,13 @@ document.querySelector(".single-cart-btn")?.addEventListener("click", (event) =>
     button.textContent = oldText;
   }, 1200);
 });
+  cartBuyBtn.addEventListener("click", () => {
+  if (cartItems.length === 0) return;
 
+  if (confirm("Ви точно хочете купити?")) {
+    cartPayMessage.textContent = "Оплачено! Дякуємо за покупку.";
+  }
+});
 renderCart();
 
 // Розсилка
