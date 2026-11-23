@@ -59,19 +59,19 @@ let reviews = [
   {
     name: "Sara Taylor",
     role: "Покупець",
-    img: "assets/images/girl.jpg",
+    img: "assets/images/girl.webp",
     text: "Замовляю в Organick вже пів року. Овочі завжди свіжі, доставка швидка, а смак як з бабусиного городу. Дуже рекомендую!",
   },
   {
     name: "Олена Коваль",
     role: "Постійна клієнтка",
-    img: "assets/images/olena.jpg",
+    img: "assets/images/olena.webp",
     text: "Нарешті знайшла місце, де справді органічні продукти. Яйця й овочі смакують як з села, а доставка завжди вчасно.",
   },
   {
     name: "Андрій Мельник",
     role: "Власник кафе",
-    img: "assets/images/andrew.jpg",
+    img: "assets/images/andrew.webp",
     text: "Беремо в Organick горіхи та крупи для нашого кафе. Якість стабільна, відвідувачі помічають різницю в смаку.",
   },
 ];
@@ -400,16 +400,42 @@ function initProductPage() {
     });
   }
 
-  let qty = document.getElementById("qty");
-  qty.addEventListener("change", function () {
-    if (qty.value === "" || Number(qty.value) < 1) {
-      qty.value = 1;
-    }
-  });
+
+
+  function fixQty() {
+    let value = Math.floor(Number(qty.value));
+    if (!value || value < 1) value = 1;
+    if (value > 100) value = 100;
+    qty.value = value;
+  }
+
+    let qty = document.getElementById("qty");
+  let qtyError = document.getElementById("qtyError");
+
+  function checkQty() {
+    let text = qty.value.trim();
+    let number = Number(text);
+
+    if (text === "") return "Введіть кількість від 1 до 100.";
+    if (!Number.isInteger(number)) return "Кількість має бути цілим числом.";
+    if (number < 1) return "Мінімальна кількість: 1.";
+    if (number > 100) return "Максимальна кількість: 100.";
+    return "";
+  }
+
+  function showQtyError() {
+    let text = checkQty();
+    qtyError.textContent = text;
+    qtyError.hidden = text === "";
+    qty.classList.toggle("is-invalid", text !== "");
+    return text === "";
+  }
+
+  qty.addEventListener("input", showQtyError);
 
   start();
 }
-// Головна сторінка: товари в блоці «Наші продукти»
+
 function initHomeProducts() {
   let grid = document.getElementById("homeProducts");
   let statusBox = document.getElementById("homeStatus");
@@ -639,7 +665,7 @@ if (document.getElementById("pName")) {
     if (isAdmin && !link && menu) {
       link = document.createElement("li");
       link.id = "adminLink";
-      link.innerHTML = '<a href="admin.html">Адмін-панель</a>';
+      link.innerHTML = '<a href="admin.html">Адмін</a>';
       menu.appendChild(link);
     }
 
@@ -1074,8 +1100,9 @@ cartClearBtn.addEventListener("click", () => {
 document.querySelector(".single-cart-btn")?.addEventListener("click", (event) => {
   if (!currentProduct) return;
 
-  let qty = Number(document.getElementById("qty").value);
+ let qty = Number(document.getElementById("qty").value);
   if (!qty || qty < 1) qty = 1;
+  if (qty > 100) qty = 100;
 
   addToCart(currentProduct, qty);
 
@@ -1089,3 +1116,26 @@ document.querySelector(".single-cart-btn")?.addEventListener("click", (event) =>
 });
 
 renderCart();
+
+// Розсилка
+const newsletterForm = document.getElementById("newsletterForm");
+
+if (newsletterForm) {
+  const newsletterEmail = document.getElementById("newsletterEmail");
+  const newsletterMessage = document.getElementById("newsletterMessage");
+
+  newsletterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const email = newsletterEmail.value.trim();
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      newsletterMessage.textContent = "Введіть коректну електронну адресу.";
+      newsletterMessage.classList.add("error");
+      return;
+    }
+
+    newsletterMessage.textContent = "Дякуємо! Ви підписались на розсилку.";
+    newsletterMessage.classList.remove("error");
+    newsletterForm.reset();
+  });
+}

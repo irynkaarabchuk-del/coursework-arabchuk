@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Argiculture Webflow</title>
+    <title>Про нас — Organick</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -12,8 +12,9 @@
       referrerpolicy="no-referrer"
     />
     <link rel="icon" type="image/png" href="assets/images/logo.svg" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    
     <link rel="stylesheet" href="assets/css/aboutus.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body>
@@ -35,7 +36,7 @@
           </button>
           <ul id="mainMenu" class="main-menu d-flex">
             <li><a href="index.html">Головна</a></li>
-            <li><a href="abotus.html">Про нас</a></li>
+            <li><a href="aboutus.html">Про нас</a></li>
             <li>
               <a href="404.html"
                 >Сторінки
@@ -46,7 +47,7 @@
               /></a>
             </li>
             <li><a href="shop.html">Магазин</a></li>
-            <li><a href="#">Проєкти</a></li>
+            <li><a href="404.html">Проєкти</a></li>
             <li><a href="contact.html">Новини</a></li>
           </ul>
 
@@ -120,13 +121,10 @@
               </div>
             </li>
           </ul>
-
-          <button class="btn shop d-flex">
-            <span class="new-shop">Дізнатись більше</span>
-            <span class="arrow-icon"
-              ><i class="fa-solid fa-arrow-right"></i
-            ></span>
-          </button>
+          <a href="404.html" class="btn shop d-flex">
+  <span class="new-shop">Дізнатись більше</span>
+  <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
+</a>
         </div>
       </section>
       <section class="about about-page why-page about-intro">
@@ -140,7 +138,7 @@
 
         <div class="information-about d-flex">
           <span class="text d-flex">Чому обирають нас?</span>
-          <h2 class="about-heading" class="d-flex">
+          <h2 class="about-heading d-flex">
             Ми не купуємо на відкритому ринку в перекупників.
           </h2>
 
@@ -201,7 +199,7 @@
       <section class="team">
         <div class="our-team d-flex">
           <span class="text d-flex">Команда</span>
-          <h2 class="about-heading" class="d-flex">Наші органічні експерти</h2>
+          <h2 class="about-heading d-flex">Наші органічні експерти</h2>
           <span class="team-words about-text d-flex">
             Ми поєднуємо досвід фермерів і творчий підхід дизайнерів, щоб на
             вашому столі завжди були свіжі та натуральні продукти. Кожен із нас
@@ -209,7 +207,7 @@
           </span>
           <div class="card">
             <div class="card-team">
-              <img src="assets/images/aboutus/giovani.webp" alt="" />
+              <img src="assets/images/aboutus/giovani.webp" alt="Гіовані Бакардо" />
               <div class="card-text">
                 <p class="name about-us">Гіовані Бакардо</p>
                 <span class="specialisation text">Фермер</span>
@@ -227,7 +225,7 @@
             </div>
 
             <div class="card-team">
-              <img src="assets/images/aboutus/marianne.webp" alt="" />
+              <img src="assets/images/aboutus/marianne.webp" alt="Маріянна Лорено" />
               <div class="card-text">
                 <p class="name about-us">Маріянна Лорено</p>
                 <span class="specialisation text">Дизайнер</span>
@@ -247,7 +245,7 @@
             </div>
 
             <div class="card-team">
-              <img src="assets/images/aboutus/riga.webp" alt="" />
+              <img src="assets/images/aboutus/riga.webp" alt="Ріга Пелоре" />
               <div class="card-text">
                 <p class="name about-us">Ріга Пелоре</p>
                 <span class="specialisation text">Фермер</span>
@@ -296,18 +294,17 @@
           </div>
         </div>
       </section>
-      <section class="newsletter d-flex">
-  <img src="assets/images/orange.webp" alt="Нарізані апельсини на блакитному фоні" />
-  <form class="newsletter-form" id="newsletterForm" novalidate>
+     <section class="newsletter d-flex">
+        <img src="assets/images/orange.webp" alt="апельсин" />
+        <div class="newsletter-text">
+          <h2>Підпишіться на нашу розсилку</h2>
+        </div>
+      <form class="newsletter-form" id="newsletterForm" novalidate>
   <input type="email" id="newsletterEmail" placeholder="Ваша електронна адреса" aria-label="Електронна адреса" />
   <button type="submit">Підписатися</button>
   <p class="newsletter-message" id="newsletterMessage" role="status" aria-live="polite"></p>
 </form>
- 
-  <input id="newsletterEmail" name="email" type="email" placeholder="Ваша електронна адреса" required />
-  <button type="submit">Підписатися</button>
-</form>
-</section>
+      </section>
     </main>
     <footer>
       <div class="footer-content d-flex">

@@ -1077,10 +1077,9 @@ h2 {
   color: #fff;
 }
 
-.newsletter-message.is-error {
-  color: #d93025;
+.newsletter-message.error {
+  color: #c72e2e;
 }
-
 footer {
   border-top: 1px solid #dedddd;
 }
@@ -1240,7 +1239,25 @@ footer {
   color: #fff;
   font-size: 14px;
 }
+#qty {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #274c5b;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 18px;
+  color: #274c5b;
+  appearance: textfield;
+}
 
+#qty::-webkit-outer-spin-button,
+#qty::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#qty.is-invalid {
+  border-color: #c0392b;
+}
 @media (min-width: 768px) {
   .top-panel .auth-btn {
     width: 46px;
@@ -1250,7 +1267,7 @@ footer {
 /* ── ДЕСКТОП ── */
 @media (min-width: 768px) {
   .search-box {
-    width: 300px;
+    width: 200px;
     height: 56px;
     background: #fafafa;
     border-radius: 36px;
