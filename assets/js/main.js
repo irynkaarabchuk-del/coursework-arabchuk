@@ -392,11 +392,27 @@ function initProductPage() {
   }
 
   let qty = document.getElementById("qty");
-  qty.addEventListener("change", function () {
-    if (qty.value === "" || Number(qty.value) < 1) {
-      qty.value = 1;
+  let qtyError = document.getElementById("qtyError");
+
+  function showQtyError() {
+    let text = qty.value.trim();
+    let number = Number(text);
+    let message = "";
+
+    if (text === "") message = "Введіть кількість від 1 до 100.";
+    else if (!Number.isInteger(number)) message = "Кількість має бути цілим числом.";
+    else if (number < 1) message = "Мінімальна кількість: 1.";
+    else if (number > 100) message = "Максимальна кількість: 100.";
+
+    if (qtyError) {
+      qtyError.textContent = message;
+      qtyError.hidden = message === "";
     }
-  });
+    qty.classList.toggle("is-invalid", message !== "");
+    return message === "";
+  }
+
+  qty.addEventListener("input", showQtyError);
 
   start();
 }
@@ -499,6 +515,8 @@ cartOverlay.innerHTML = `
     <h2 class="modal-title" id="cartTitle">Кошик</h2>
     <ul class="cart-list" id="cartList"></ul>
     <p class="cart-total" id="cartTotal"></p>
+    <p class="cart-pay-message" id="cartPayMessage" role="status" aria-live="polite"></p>
+    <button type="button" class="modal-btn" id="cartBuy">Купити</button>
     <button type="button" class="modal-btn" id="cartClear">Очистити кошик</button>
   </div>`;
 document.body.append(cartOverlay);
@@ -506,6 +524,8 @@ document.body.append(cartOverlay);
 const cartList = document.getElementById("cartList");
 const cartTotalBox = document.getElementById("cartTotal");
 const cartClearBtn = document.getElementById("cartClear");
+const cartBuyBtn = document.getElementById("cartBuy");
+const cartPayMessage = document.getElementById("cartPayMessage");
 const cartText = document.querySelector(".cart-box span");
 
 function renderCart() {
@@ -551,6 +571,8 @@ function renderCart() {
   cartTotalBox.textContent = "Разом: " + formatPrice(getCartTotal());
   cartTotalBox.hidden = cartItems.length === 0;
   cartClearBtn.hidden = cartItems.length === 0;
+  cartBuyBtn.hidden = cartItems.length === 0;
+  if (cartItems.length === 0) cartPayMessage.textContent = "";
 
   if (cartText) {
     cartText.textContent = "Кошик (" + getCartCount() + ")";
@@ -558,6 +580,7 @@ function renderCart() {
 }
 
 function openCart() {
+    cartPayMessage.textContent = "";
   renderCart();
   cartOverlay.classList.add("active");
 }
@@ -584,10 +607,18 @@ cartClearBtn.addEventListener("click", () => {
 document.querySelector(".single-cart-btn")?.addEventListener("click", (event) => {
   if (!currentProduct) return;
 
-  let qty = Number(document.getElementById("qty").value);
-  if (!qty || qty < 1) qty = 1;
+  const qtyInput = document.getElementById("qty");
+  const text = qtyInput.value.trim();
+  const number = Number(text);
+  const valid = text !== "" && Number.isInteger(number) && number >= 1 && number <= 100;
 
-  addToCart(currentProduct, qty);
+  if (!valid) {
+    qtyInput.dispatchEvent(new Event("input"));
+    qtyInput.focus();
+    return;
+  }
+
+  addToCart(currentProduct, number);
 
   const button = event.currentTarget;
   const oldText = button.textContent;
@@ -597,4 +628,87 @@ document.querySelector(".single-cart-btn")?.addEventListener("click", (event) =>
   }, 1200);
 });
 
+cartBuyBtn.addEventListener("click", () => {
+  if (cartItems.length === 0) return;
+
+  if (confirm("Ви точно хочете купити?")) {
+    cartPayMessage.textContent = "Оплачено! Дякуємо за покупку.";
+  }
+});
+
+function getFormMessage(form, className) {
+  let box = form.querySelector("." + className);
+  if (!box) {
+    box = document.createElement("p");
+    box.className = className;
+    box.setAttribute("role", "status");
+    form.append(box);
+  }
+  return box;
+}
+
+function showFormMessage(box, text, isError) {
+  box.textContent = text;
+  box.classList.toggle("is-error", isError);
+  box.classList.toggle("error", isError);
+}
+
+// розсилка
+const newsletterForm =
+  document.getElementById("newsletterForm") || document.querySelector(".newsletter form");
+
+if (newsletterForm) {
+  const newsletterEmail = newsletterForm.querySelector("input");
+  const newsletterMessage = getFormMessage(newsletterForm, "newsletter-message");
+
+  newsletterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!/^\S+@\S+\.\S+$/.test(newsletterEmail.value.trim())) {
+      showFormMessage(newsletterMessage, "Введіть коректну електронну адресу.", true);
+      return;
+    }
+
+    showFormMessage(newsletterMessage, "Дякуємо! Ви підписались на розсилку.", false);
+    newsletterForm.reset();
+  });
+}
+
+// форма надіслати повідомлення
+const contactForm =
+  document.getElementById("contactForm") ||
+  document.querySelector("main form:not(#newsletterForm):not(#productForm)");
+
+if (contactForm) {
+  const contactMessage = getFormMessage(contactForm, "contact-message");
+  const contactFields = contactForm.querySelectorAll(
+    "input:not([type=hidden]):not([type=submit]):not([type=checkbox]), textarea, select"
+  );
+
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let hasEmpty = false;
+    contactFields.forEach((field) => {
+      const empty = field.value.trim() === "";
+      field.classList.toggle("is-invalid", empty);
+      if (empty) hasEmpty = true;
+    });
+
+    if (hasEmpty) {
+      showFormMessage(contactMessage, "Помилка: заповніть усі поля.", true);
+      return;
+    }
+
+    const emailField = contactForm.querySelector("input[type=email]");
+    if (emailField && !/^\S+@\S+\.\S+$/.test(emailField.value.trim())) {
+      emailField.classList.add("is-invalid");
+      showFormMessage(contactMessage, "Помилка: введіть коректну електронну пошту.", true);
+      return;
+    }
+
+    showFormMessage(contactMessage, "Повідомлення надіслано!", false);
+    contactForm.reset();
+  });
+}
 renderCart();
