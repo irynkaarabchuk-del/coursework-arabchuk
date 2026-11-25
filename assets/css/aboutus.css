@@ -25,19 +25,30 @@
 .image .subtitle {
   font-size: 30px;
 }
-.about {
+.about.about-page {
+  margin-top: 0;
   background-color: #fff;
 }
 .about-visual {
   position: relative;
   
 }
+.about-page .feature-text h3 {
+  margin: 0;
+}
+.about.information-about h2 {
+   text-align: left;       
+    justify-content: flex-start;
+}
+.about-page .feature-item {
+  align-items: center;       
+}
 .about-visual .about-image {
   position: relative;
   z-index: 1;
   width: 100%;
   height: auto;
-  padding: 0;
+  padding-top:20px;
 }
 .about-page .list {
   flex-direction: column;
@@ -46,11 +57,12 @@
 .deco-tomatoes {
   display: none;
 }
-.about-text {
+.team .about-text {
   font-size: 18px;
-  padding-top: 10px;
+  padding-top: 20px;
   padding-right: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }
 .about-page .shop .arrow-icon {
   transform: rotate(0deg);
@@ -62,6 +74,10 @@
   align-items: flex-start;
 }
 
+.about .information-about h2 {
+  text-align: left;
+  justify-content: flex-start;
+}
 .about-page .about-visual .about-image {
   transform: translateX(-10%);
 }
@@ -176,6 +192,7 @@
     font-family: var(--accent-font);
     font-size: 30px;
     justify-content: center;
+    padding-top: 10px;
 }
 .our-team {
   flex-direction: column;
@@ -389,11 +406,15 @@
   .about-intro .shop .new-shop {
     padding-right: 0;
   }
-
+.about .information-about h2 {
+  text-align: left;
+  justify-content: flex-start;
+}
   .about-page .feature-text h3 {
     font-size: 18px;
-    margin-bottom: 0;
+    margin: 0;
     color: var(--dark-color);
+    align-items: center;
   }
   .about-page .about-visual .about-image {
     transform: none;
@@ -476,8 +497,10 @@
     width: 220px;
     padding: 0;
   }
-  .about-page .feature-item {
+  .about-page.feature-item {
     gap: 8px;
+    display: flex;
+    align-items: center;
   }
   .deco-tomatoes {
     left: -2%;

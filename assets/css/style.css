@@ -292,12 +292,11 @@ ul {
   background-color: #f9f8f8;
   display: flex;
   flex-direction: column;
-
   overflow: hidden;
 }
 .information-about {
   flex-direction: column;
-  padding: 0;
+  padding: 0 20px;
 }
 .about-image {
   margin: 0 auto;
@@ -308,25 +307,29 @@ ul {
   font-size: 30px;
   justify-content: center;
 }
-
+.about .information-about h2 {
+ text-align: center;     
+  justify-content: center;  
+  padding-left: 0;
+  padding-top:10px;
+  padding-bottom: 10px;
+}
 .about-text {
-  padding-bottom: 46px;
-  font-family: var(--secondary-font);
-  font-size: 18px;
+  padding-bottom: 30px;
   color: #525c60;
+  font-family: var(--secondary-font);
+  font-size: 15px;
 }
 
 h2 {
   color: var(--dark-color);
   font-size: 25px;
-  padding-left: 20px;
   justify-content: center;
 }
-.about-text {
-  font-family: var(--secondary-font);
-  font-size: 15px;
-  padding-left: 20px;
+.about-text h2 {
+  padding-left: 0;
 }
+
 .list {
   display: flex;
   flex-direction: column;
@@ -396,11 +399,13 @@ h2 {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 .shop .new-shop {
   color: #fff;
   font-size: 20px;
   padding-right: 0;
+
 }
 
 .shop .fa-solid {
@@ -429,7 +434,7 @@ h2 {
   grid-template-columns: minmax(280px, 335px);
   justify-content: center;
   gap: 20px;
-  padding: 0 16px 122px;
+  padding: 0 16px 50px;
 }
 
 .product-card {
@@ -1646,6 +1651,8 @@ footer {
   .about .information-about h2 {
     font-size: 50px;
     width: 600px;
+    text-align: left; 
+    justify-content: flex-start;
   }
   .about .information-about .about-text {
     width: 550px;
