@@ -11,6 +11,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/shop.css" />
     <link rel="icon" type="image/png" href="assets/images/logo.svg" />
@@ -48,7 +49,7 @@
             </li>
             <li><a href="shop.html">Магазин</a></li>
             <li><a href="404.html">Проєкти</a></li>
-            <li><a href="contact.html">Новини</a></li>
+            <li><a href="contact.html">Контакти</a></li>
           </ul>
 
           <div class="top-panel">
@@ -169,22 +170,10 @@
     <span class="subtitle">Відгуки</span>
     <h2 id="testimonial-heading" class="saying">Що кажуть наші клієнти?</h2>
 
-    <img id="reviewImg" class="girl" src="assets/images/girl.webp" alt="Sara Taylor" />
-    <div class="rating">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <blockquote id="reviewText" class="testimonial-girl">
-      Замовляю в Organick вже пів року. Овочі завжди свіжі, доставка
-      швидка, а смак як з бабусиного городу. Дуже рекомендую!І
-    </blockquote>
-    <p id="reviewName" class="name">Сара Тейлор</p>
-    <p id="reviewRole" class="consumer">Покупець</p>
-
-    <div class="pages d-flex">
-      <button type="button" class="testimonial-page active" aria-label="Відгук 1"></button>
-      <button type="button" class="testimonial-page" aria-label="Відгук 2"></button>
-      <button type="button" class="testimonial-page" aria-label="Відгук 3"></button>
-    </div>
+    <div class="swiper reviews-swiper" id="reviewsSwiper">
+  <div class="swiper-wrapper" id="reviewsWrapper"></div>
+  <div class="swiper-pagination"></div>
+</div>
   </div>
 
   <div class="stats">
@@ -482,7 +471,8 @@
         </p>
       </div>
     </footer>
-  <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
 <script type="module" src="assets/js/auth.js"></script>
   </body>
 </html>

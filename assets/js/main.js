@@ -73,30 +73,44 @@ let reviews = [
   },
 ];
 
-let reviewImg = document.getElementById("reviewImg");
-let reviewText = document.getElementById("reviewText");
-let reviewName = document.getElementById("reviewName");
-let reviewRole = document.getElementById("reviewRole");
-let reviewDots = document.querySelectorAll(".testimonial-page");
+if (reviewsWrapper) {
+    for (const review of reviews) {
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide review-slide";
 
-function showReview(index) {
-  let review = reviews[index];
+    const img = document.createElement("img");
+    img.className = "girl";
+    img.src = review.img;
+    img.alt = review.name;
 
-  reviewImg.src = review.img;
-  reviewImg.alt = review.name;
-  reviewText.textContent = review.text;
-  reviewName.textContent = review.name;
-  reviewRole.textContent = review.role;
+    const rating = document.createElement("div");
+    rating.className = "rating";
+    for (let i = 0; i < 5; i++) {
+      rating.append(document.createElement("span"));
+    }
 
-  for (let i = 0; i < reviewDots.length; i++) {
-    reviewDots[i].classList.toggle("active", i === index);
+    const text = document.createElement("blockquote");
+    text.className = "testimonial-girl";
+    text.textContent = review.text;
+
+    const name = document.createElement("p");
+    name.className = "name";
+    name.textContent = review.name;
+
+    const role = document.createElement("p");
+    role.className = "consumer";
+    role.textContent = review.role;
+
+    slide.append(img, rating, text, name, role);
+    reviewsWrapper.append(slide);
   }
-}
-
-if (reviewImg && reviewDots.length) {
-  for (let i = 0; i < reviewDots.length; i++) {
-    reviewDots[i].addEventListener("click", function () {
-      showReview(i);
+    if (typeof Swiper !== "undefined") {
+    new Swiper("#reviewsSwiper", {
+      loop: true,
+      grabCursor: true,
+      spaceBetween: 30,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      keyboard: { enabled: true },
     });
   }
 }
