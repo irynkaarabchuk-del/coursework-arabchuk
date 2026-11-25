@@ -1,6 +1,5 @@
 const supabase = require("../data/config");
 
-// перевірка, що запит надіслав залогінений адмін
 async function requireAdmin(req, res, next) {
   const token = (req.headers.authorization || "").replace("Bearer ", "");
   if (!token) return res.status(401).json({ error: "Потрібен вхід." });
@@ -67,7 +66,6 @@ const router = (app) => {
     response.json({ ok: true });
   });
 
-  // CREATE
   app.post("/api/products", requireAdmin, async (request, response) => {
     const { product, error: invalid } = readProduct(request.body);
     if (invalid) return response.status(400).json({ error: invalid });
@@ -80,7 +78,6 @@ const router = (app) => {
     response.status(201).json(data);
   });
 
-  // UPDATE
   app.put("/api/products/:id", requireAdmin, async (request, response) => {
     const { product, error: invalid } = readProduct(request.body);
     if (invalid) return response.status(400).json({ error: invalid });
@@ -100,7 +97,6 @@ const router = (app) => {
     response.json(data);
   });
 
-  // DELETE
   app.delete("/api/products/:id", requireAdmin, async (request, response) => {
     const { data, error } = await supabase
       .from("products")

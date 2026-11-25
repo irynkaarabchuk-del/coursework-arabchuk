@@ -1,4 +1,6 @@
+const path = require("path");
 require("dotenv").config({ quiet: true });
+
 const express = require("express");
 const cors = require("cors");
 const routes = require("./routes/routes");
@@ -11,6 +13,9 @@ app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : "*" }));
 app.use(express.json({ limit: "10kb" }));
 
 routes(app);
+
+app.use("/server", (request, response) => response.status(404).end());
+app.use(express.static(path.join(__dirname, "..")));
 
 app.listen(port, () => {
   console.log("Сервер запущено на порту " + port);
