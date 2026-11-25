@@ -885,16 +885,26 @@ h2 {
 }
 
 .news {
-  padding: 12px 18px;
-  font-size: 20px;
-  border-radius: 16px;
-  width: 200px;
-  height: 50px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  margin-top: 20px;
-  border: 2px solid;
+  width: 200px;
+  height: 50px;
+  margin: 20px auto 0;
+  padding: 12px 18px;
+  border: 2px solid var(--dark-color);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--dark-color);
+  font-size: 20px;
+  white-space: nowrap;
+}
+.news .arrow-icon {
+  flex-shrink: 0;
+  position: static; 
+  transform: rotate(270deg);         
 }
 .fa-user {
   color: var(--btn-bg-color);
