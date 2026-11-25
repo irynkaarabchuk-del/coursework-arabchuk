@@ -1,7 +1,7 @@
 import { db } from "./app.js";
 const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
   ? "http://localhost:3002"
-  : "https://organick-fresh.onrender.com";
+  : "https://irene-organic.onrender.com";
 
 function initAdminPage() {
 
