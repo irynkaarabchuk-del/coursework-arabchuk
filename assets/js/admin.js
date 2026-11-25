@@ -121,7 +121,7 @@ function initAdminPage() {
 
       const imageCell = document.createElement("td");
       const image = document.createElement("img");
-      image.src = product.image_url || "";
+            if (product.image_url) image.src = product.image_url;
       image.alt = product.name;
       imageCell.appendChild(image);
 
@@ -205,14 +205,21 @@ function initAdminPage() {
 
 
 
-    const response = await fetch(API_URL + path, {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
+    let response;
+    try {
+      response = await fetch(API_URL + path, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+    } catch {
+      throw new Error(
+        "Сервер не відповідає (може прокидатися до хвилини). Спробуйте ще раз.",
+      );
+    }
 
     const result = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(result.error || "Помилка сервера.");

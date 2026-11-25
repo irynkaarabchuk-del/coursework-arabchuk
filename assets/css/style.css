@@ -833,7 +833,8 @@ h2 {
   gap: 20px;
 }
 .galery-item img {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 350px;
   object-fit: cover;
   display: block;

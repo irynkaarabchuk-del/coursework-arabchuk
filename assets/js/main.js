@@ -43,7 +43,6 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  {},
   { threshold: 0, rootMargin: "0px 0px -50px 0px" },
 );
 
@@ -140,9 +139,9 @@ async function loadProducts() {
     products.push({
       id: item.id,
       name: item.name,
-      category: item.categories.name,
+      category: item.categories ? item.categories.name : "Без категорії",
       price: Number(item.price),
-      oldPrice: Number(item.old_price),
+      oldPrice: item.old_price ? Number(item.old_price) : null,
       image: item.image_url,
       description: item.description,
       details: item.details,
@@ -178,6 +177,7 @@ function createProductCard(product) {
   let image = document.createElement("img");
   image.src = product.image;
   image.alt = product.name;
+  image.loading = "lazy";
 
   let info = createElement("div", "product-info");
   let title = document.createElement("h3");
@@ -187,9 +187,11 @@ function createProductCard(product) {
 
   let bottom = createElement("div", "product-bottom");
   let prices = createElement("div", "prices");
-  prices.appendChild(
-    createElement("span", "old-price", formatPrice(product.oldPrice)),
-  );
+    if (product.oldPrice) {
+    prices.appendChild(
+      createElement("span", "old-price", formatPrice(product.oldPrice)),
+    );
+  }
   prices.appendChild(
     createElement("span", "new-price", formatPrice(product.price)),
   );
@@ -340,7 +342,9 @@ function showProduct(product, products) {
   document.getElementById("pImage").alt = product.name;
   document.getElementById("pBadge").textContent = product.category;
   document.getElementById("pName").textContent = product.name;
-  document.getElementById("pOld").textContent = formatPrice(product.oldPrice);
+  document.getElementById("pOld").textContent = product.oldPrice
+    ? formatPrice(product.oldPrice)
+    : "";
   document.getElementById("pNew").textContent = formatPrice(product.price);
   document.getElementById("pShort").textContent = product.description;
   document.getElementById("pLong").textContent = product.details;
@@ -734,9 +738,7 @@ if (newsletterForm) {
   });
 }
 
-const contactForm =
-  document.getElementById("contactForm") ||
-  document.querySelector("main form:not(#newsletterForm):not(#productForm)");
+const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
   const contactMessage = getFormMessage(contactForm, "contact-message");

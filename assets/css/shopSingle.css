@@ -63,31 +63,6 @@
   color: var(--dark-color);
 }
 
-.qty-input {
-  width: 70px;
-  height: 56px;
-  border: 1.5px solid var(--dark-color);
-  border-radius: 12px;
-  background: #fff;
-  text-align: center;
-  font-family: var(--main-font);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--dark-color);
-  outline: none;
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
-.qty-input:focus {
-  border-color: var(--secondary-color);
-}
-
-.qty-input::-webkit-outer-spin-button,
-.qty-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
 .single-cart-btn {
   margin: 0;
@@ -103,7 +78,6 @@
   padding-right: 22px;
 }
 
-/* ===== Вкладки ===== */
 .single-tabs {
   max-width: 900px;
   margin: 0 auto;
@@ -215,12 +189,6 @@
 
   .single-qty-label {
     font-size: 18px;
-  }
-
-  .qty-input {
-    width: 100px;
-    height: 80px;
-    font-size: 22px;
   }
 
   .related-title {

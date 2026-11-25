@@ -65,7 +65,7 @@ function initAuth() {
     $("authTitle").textContent = isLogin ? "Увійти" : "Реєстрація";
     submitBtn.textContent = isLogin ? "Увійти" : "Зареєструватися";
     repeatField.hidden = isLogin;
-    passInput.autocomplete = "current-password";
+    passInput.autocomplete = isLogin ? "current-password" : "new-password";
     $("authSwitchText").textContent = isLogin ? "Немає акаунту?" : "Вже є акаунт?";
     $("authSwitch").textContent = isLogin ? "Зареєструйтесь" : "Увійдіть";
     setMessage("");
@@ -88,7 +88,7 @@ function initAuth() {
     if (m.includes("already registered")) return "Користувач з такою поштою вже існує.";
     if (m.includes("email not confirmed")) return "Підтвердіть пошту за листом.";
     if (m.includes("rate limit")) return "Забагато спроб. Спробуйте пізніше.";
-    if (m.includes("password")) return "Пароль має містити щонайменше 6 символів.";
+    if (m.includes("password")) return "Пароль має містити щонайменше 8 символів.";
     return "Сталася помилка. Спробуйте ще раз.";
   }
 
@@ -186,9 +186,9 @@ function initAuth() {
   }
 
   db.auth.getSession().then(({ data }) => updateHeader(data.session));
-  db.auth.onAuthStateChange((_event, session) => {
+    db.auth.onAuthStateChange((_event, session) => {
     updateHeader(session);
-    updateAdminLink(session);
+    setTimeout(() => updateAdminLink(session), 0);
   });
 
 }

@@ -179,9 +179,7 @@
 }
 
 @media (min-width: 1024px) {
-  .main-menu {
-    width: 80px;
-  }
+ 
 
   .admin-panel {
     grid-template-columns: 400px minmax(0, 1fr);

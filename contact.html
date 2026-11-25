@@ -112,7 +112,7 @@
 
           <div class="contact-item">
             <div class="contact-item-icon">
-              <img src="assets/images/icons/contact/letter.png" />
+              <img src="assets/images/icons/contact/letter.png" alt=""/>
             </div>
             <div class="contact-item-text">
               <h3>Напишіть нам</h3>
@@ -122,7 +122,7 @@
 
           <div class="contact-item contact-item-active">
             <div class="contact-item-icon">
-              <img src="assets/images/icons/contact/phone.png" />
+              <img src="assets/images/icons/contact/phone.png" alt=""/>
             </div>
             <div class="contact-item-text">
               <h3>Зателефонуйте нам</h3>
@@ -168,7 +168,7 @@
           <div class="contact-location">
             <img
               class="contact-icon"
-              src="assets/images/icons/contact/location.png"
+              src="assets/images/icons/contact/location.png" alt=""
             />
             <div>
               <h3>Київ, Україна</h3>
@@ -179,7 +179,7 @@
           <div class="contact-location">
             <img
               class="contact-icon"
-              src="assets/images/icons/contact/location.png"
+              src="assets/images/icons/contact/location.png" alt=""
             />
             <div>
               <h3>Львів, Україна</h3>
@@ -190,7 +190,7 @@
       </section>
 
       <section class="contact-form-section">
-        <form class="contact-form" action="#" method="post">
+        <form class="contact-form" id="contactForm" novalidate>
           <div class="contact-field">
             <label for="fullName">Повне імʼя*</label>
             <input
@@ -362,40 +362,7 @@
         </p>
       </div>
     </footer>
-    <div class="modal-overlay" id="modalOverlay">
-      <div
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitle"
-      >
-        <button
-          type="button"
-          class="modal-close"
-          id="modalClose"
-          aria-label="Закрити"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title" id="modalTitle">Увійти</h2>
-        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
-
-        <div class="modal-field">
-          <label for="email">Електронна пошта</label>
-          <input id="email" type="email" placeholder="Введіть вашу пошту" />
-        </div>
-        <div class="modal-field">
-          <label for="password">Пароль</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Введіть ваш пароль"
-          />
-        </div>
-
-        <a href="index.html" class="modal-btn">Увійти</a>
-      </div>
-    </div>
+    
     <script src="assets/js/main.js"></script>
     <script type="module" src="assets/js/auth.js"></script>
   </body>
