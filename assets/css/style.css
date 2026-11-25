@@ -1555,8 +1555,9 @@ footer {
   .galery-item {
     width: calc(50% - 10px);
   }
-  .galery-item img {
+    .galery-item img {
     width: 612px;
+    max-width: none;
     height: 583px;
   }
   .galery-label {
