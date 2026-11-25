@@ -18,7 +18,6 @@
   </head>
 
   <body>
-
     <header class="main-header">
       <nav class="navbar content-wrap d-flex">
         <div class="navbar-content d-flex">
@@ -27,7 +26,12 @@
             <span>Organick</span>
           </a>
 
-          <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню">
+          <button
+            type="button"
+            id="iconBlock"
+            class="menu-icon"
+            aria-label="Меню"
+          >
             <div id="iconOpen" class="menu-icon-open">
               <i class="fa-solid fa-bars" aria-hidden="true"></i>
             </div>
@@ -42,7 +46,11 @@
             <li>
               <a href="404.html">
                 Сторінки
-                <img class="icon-page" src="assets/images/icons/arrow.svg" alt="Стрілка" />
+                <img
+                  class="icon-page"
+                  src="assets/images/icons/arrow.svg"
+                  alt="Стрілка"
+                />
               </a>
             </li>
             <li><a href="shop.html">Магазин</a></li>
@@ -51,12 +59,24 @@
           </ul>
 
           <div class="top-panel">
-          <form class="search-box" role="search" action="shop.html" method="get">
-  <input id="headerSearch" name="search" type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" autocomplete="off" />
-  <button type="submit" class="search-btn" aria-label="Пошук">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-</form>
+            <form
+              class="search-box"
+              role="search"
+              action="shop.html"
+              method="get"
+            >
+              <input
+                id="headerSearch"
+                name="search"
+                type="search"
+                placeholder="Пошук товарів"
+                aria-label="Пошук товарів"
+                autocomplete="off"
+              />
+              <button type="submit" class="search-btn" aria-label="Пошук">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
             <div class="cart-box">
               <div class="cart-icon">
                 <i class="fa-solid fa-shopping-cart"></i>
@@ -77,44 +97,61 @@
       <section class="shop-products">
         <h2 class="shop-heading">Каталог товарів</h2>
 
-  <form class="shop-toolbar" id="shopToolbar" action="#">
-    <div class="shop-toolbar-field">
-      <label for="shopCategory">Категорія</label>
-      <select id="shopCategory">
-        <option value="">Усі категорії</option>
-      </select>
-    </div>
+        <form class="shop-toolbar" id="shopToolbar" action="#">
+          <div class="shop-toolbar-field">
+            <label for="shopCategory">Категорія</label>
+            <select id="shopCategory">
+              <option value="">Усі категорії</option>
+            </select>
+          </div>
 
-    <div class="shop-toolbar-field">
-      <label for="shopSort">Сортування</label>
-      <select id="shopSort">
-        <option value="default">За замовчуванням</option>
-        <option value="price-asc">Ціна: від дешевих</option>
-        <option value="price-desc">Ціна: від дорогих</option>
-        <option value="name-asc">Назва: А–Я</option>
-        <option value="name-desc">Назва: Я–А</option>
-      </select>
-    </div>
+          <div class="shop-toolbar-field">
+            <label for="shopSort">Сортування</label>
+            <select id="shopSort">
+              <option value="default">За замовчуванням</option>
+              <option value="price-asc">Ціна: від дешевих</option>
+              <option value="price-desc">Ціна: від дорогих</option>
+              <option value="name-asc">Назва: А–Я</option>
+              <option value="name-desc">Назва: Я–А</option>
+            </select>
+          </div>
 
-    <button type="button" class="shop-toolbar-reset" id="shopReset">Скинути</button>
-  </form>
+          <button type="button" class="shop-toolbar-reset" id="shopReset">
+            Скинути
+          </button>
+        </form>
 
-      <p class="shop-empty" id="shopStatus" hidden></p>
-<p class="shop-empty" id="shopEmpty" hidden>За вашим запитом нічого не знайдено.</p>
-<div class="products" id="shopGrid"></div>
+        <p class="shop-empty" id="shopStatus" hidden></p>
+        <p class="shop-empty" id="shopEmpty" hidden>
+          За вашим запитом нічого не знайдено.
+        </p>
+        <div class="products" id="shopGrid"></div>
       </section>
 
       <section class="newsletter d-flex">
-  <img src="assets/images/orange.webp" alt="Нарізані апельсини на блакитному фоні" />
-  <div class="newsletter-text">
-    <h2>Підпишіться на нашу розсилку</h2>
-  </div>
-  <form class="newsletter-form" id="newsletterForm" novalidate>
-  <input type="email" id="newsletterEmail" placeholder="Ваша електронна адреса" aria-label="Електронна адреса" />
-  <button type="submit">Підписатися</button>
-  <p class="newsletter-message" id="newsletterMessage" role="status" aria-live="polite"></p>
-</form>
-</section>
+        <img
+          src="assets/images/orange.webp"
+          alt="Нарізані апельсини на блакитному фоні"
+        />
+        <div class="newsletter-text">
+          <h2>Підпишіться на нашу розсилку</h2>
+        </div>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <input
+            type="email"
+            id="newsletterEmail"
+            placeholder="Ваша електронна адреса"
+            aria-label="Електронна адреса"
+          />
+          <button type="submit">Підписатися</button>
+          <p
+            class="newsletter-message"
+            id="newsletterMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+      </section>
     </main>
 
     <footer>
@@ -138,20 +175,48 @@
             Свіжі органічні продукти від перевірених фермерів із доставкою до
             вашого дому.
           </p>
-       <div class="footer-socials">
-  <a href="https://www.instagram.com/?hl=uk" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-instagram"></use></svg>
-  </a>
-  <a href="https://www.facebook.com/?locale=uk_UA" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-facebook"></use></svg>
-  </a>
-  <a href="https://x.com/?lang=uk" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-twitter"></use></svg>
-  </a>
-  <a href="https://www.pinterest.com/PinterestUA/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-pinterest"></use></svg>
-  </a>
-</div>
+          <div class="footer-socials">
+            <a
+              href="https://www.instagram.com/?hl=uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-instagram"></use>
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/?locale=uk_UA"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-facebook"></use>
+              </svg>
+            </a>
+            <a
+              href="https://x.com/?lang=uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-twitter"></use>
+              </svg>
+            </a>
+            <a
+              href="https://www.pinterest.com/PinterestUA/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-pinterest"></use>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div class="footer-links">
@@ -174,28 +239,53 @@
         </p>
       </div>
     </footer>
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button type="button" class="modal-close" id="modalClose" aria-label="Закрити">
-      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
-    <h2 class="modal-title" id="modalTitle">Увійти</h2>
-    <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
+    <div class="modal-overlay" id="modalOverlay">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <button
+          type="button"
+          class="modal-close"
+          id="modalClose"
+          aria-label="Закрити"
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <h2 class="modal-title" id="modalTitle">Увійти</h2>
+        <p class="modal-subtitle">Ласкаво просимо до магазину Organick</p>
 
-    <form class="modal-form" id="loginForm" action="#" method="post">
-      <div class="modal-field">
-        <label for="email">Електронна пошта</label>
-        <input id="email" name="email" type="email" placeholder="Введіть вашу пошту" autocomplete="email" required />
+        <form class="modal-form" id="loginForm" action="#" method="post">
+          <div class="modal-field">
+            <label for="email">Електронна пошта</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Введіть вашу пошту"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="modal-field">
+            <label for="password">Пароль</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Введіть ваш пароль"
+              autocomplete="current-password"
+              minlength="6"
+              required
+            />
+          </div>
+          <button type="submit" class="modal-btn">Увійти</button>
+        </form>
       </div>
-      <div class="modal-field">
-        <label for="password">Пароль</label>
-        <input id="password" name="password" type="password" placeholder="Введіть ваш пароль" autocomplete="current-password" minlength="6" required />
-      </div>
-      <button type="submit" class="modal-btn">Увійти</button>
-    </form>
-  </div>
-</div>
-<script src="assets/js/main.js"></script>
-<script type="module" src="assets/js/auth.js"></script>
+    </div>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
   </body>
 </html>

@@ -22,36 +22,40 @@ if (searchForm && searchButton && headerSearchInput) {
   });
 }
 
-const iconBlock = document.getElementById('iconBlock');
-const iconOpen = document.getElementById('iconOpen');
-const iconClose = document.getElementById('iconClose');
-const mainMenu = document.getElementById('mainMenu');
+const iconBlock = document.getElementById("iconBlock");
+const iconOpen = document.getElementById("iconOpen");
+const iconClose = document.getElementById("iconClose");
+const mainMenu = document.getElementById("mainMenu");
 
 if (iconBlock) {
-  iconBlock.addEventListener('click', () => {
-    iconOpen.classList.toggle('d-none');
-    iconClose.classList.toggle('d-none');
-    mainMenu.classList.toggle('menu-open');
+  iconBlock.addEventListener("click", () => {
+    iconOpen.classList.toggle("d-none");
+    iconClose.classList.toggle("d-none");
+    mainMenu.classList.toggle("menu-open");
   });
 }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  {},
+  { threshold: 0, rootMargin: "0px 0px -50px 0px" },
+);
+
+document
+  .querySelectorAll(
+    ".about, .products-section, .testimonial, .offer, .about-us, .galery, .blog, .newsletter, footer",
+  )
+  .forEach((el) => {
+    el.classList.add("animate");
+    observer.observe(el);
   });
-}, { }, { threshold: 0, rootMargin: '0px 0px -50px 0px'  });
 
-document.querySelectorAll(
-  '.about, .products-section, .testimonial, .offer, .about-us, .galery, .blog, .newsletter, footer'
-).forEach(el => {
-  el.classList.add('animate');
-  observer.observe(el);
-});
-
-
-// відгуки
 let reviews = [
   {
     name: "Sara Taylor",
@@ -72,9 +76,9 @@ let reviews = [
     text: "Беремо в Organick горіхи та крупи для нашого кафе. Якість стабільна, відвідувачі помічають різницю в смаку.",
   },
 ];
-
+const reviewsWrapper = document.getElementById("reviewsWrapper");
 if (reviewsWrapper) {
-    for (const review of reviews) {
+  for (const review of reviews) {
     const slide = document.createElement("div");
     slide.className = "swiper-slide review-slide";
 
@@ -104,7 +108,7 @@ if (reviewsWrapper) {
     slide.append(img, rating, text, name, role);
     reviewsWrapper.append(slide);
   }
-    if (typeof Swiper !== "undefined") {
+  if (typeof Swiper !== "undefined") {
     new Swiper("#reviewsSwiper", {
       loop: true,
       grabCursor: true,
@@ -114,16 +118,16 @@ if (reviewsWrapper) {
     });
   }
 }
-// Магазин
 
-// завантажуємо товари з бази даних
 async function loadProducts() {
   let module = await import("./app.js");
   let db = module.db;
 
-   let result = await db
+  let result = await db
     .from("products")
-    .select("id, name, price, old_price, image_url, description, details, weight, origin, shelf_life, categories(name)")
+    .select(
+      "id, name, price, old_price, image_url, description, details, weight, origin, shelf_life, categories(name)",
+    )
     .order("name");
   if (result.error) {
     throw result.error;
@@ -139,7 +143,7 @@ async function loadProducts() {
       category: item.categories.name,
       price: Number(item.price),
       oldPrice: Number(item.old_price),
-            image: item.image_url,
+      image: item.image_url,
       description: item.description,
       details: item.details,
       weight: item.weight,
@@ -165,7 +169,6 @@ function createElement(tag, className, text) {
   return element;
 }
 
-// будуємо картку товару з обʼєкта даних
 function createProductCard(product) {
   let url = "shopSingle.html?id=" + product.id;
 
@@ -184,8 +187,12 @@ function createProductCard(product) {
 
   let bottom = createElement("div", "product-bottom");
   let prices = createElement("div", "prices");
-  prices.appendChild(createElement("span", "old-price", formatPrice(product.oldPrice)));
-  prices.appendChild(createElement("span", "new-price", formatPrice(product.price)));
+  prices.appendChild(
+    createElement("span", "old-price", formatPrice(product.oldPrice)),
+  );
+  prices.appendChild(
+    createElement("span", "new-price", formatPrice(product.price)),
+  );
 
   let rating = createElement("div", "rating");
   for (let i = 0; i < 5; i++) {
@@ -201,7 +208,6 @@ function createProductCard(product) {
   card.appendChild(image);
   card.appendChild(info);
 
-
   card.addEventListener("click", function (event) {
     if (event.target.closest("a")) {
       return;
@@ -213,9 +219,14 @@ function createProductCard(product) {
 }
 
 function showLoadError(box, retry) {
-  box.textContent = "Не вдалося завантажити товари. Перевірте зʼєднання з інтернетом.";
+  box.textContent =
+    "Не вдалося завантажити товари. Перевірте зʼєднання з інтернетом.";
 
-  let button = createElement("button", "shop-toolbar-reset", "Спробувати ще раз");
+  let button = createElement(
+    "button",
+    "shop-toolbar-reset",
+    "Спробувати ще раз",
+  );
   button.type = "button";
   button.addEventListener("click", retry);
 
@@ -224,7 +235,6 @@ function showLoadError(box, retry) {
   box.hidden = false;
 }
 
-// Каталог: завантаження, пошук, фільтр, сортування
 function initShopPage() {
   let grid = document.getElementById("shopGrid");
   let statusBox = document.getElementById("shopStatus");
@@ -262,13 +272,21 @@ function initShopPage() {
     });
 
     if (mode === "price-asc") {
-      visible.sort(function (a, b) { return a.price - b.price; });
+      visible.sort(function (a, b) {
+        return a.price - b.price;
+      });
     } else if (mode === "price-desc") {
-      visible.sort(function (a, b) { return b.price - a.price; });
+      visible.sort(function (a, b) {
+        return b.price - a.price;
+      });
     } else if (mode === "name-asc") {
-      visible.sort(function (a, b) { return a.name.localeCompare(b.name, "uk"); });
+      visible.sort(function (a, b) {
+        return a.name.localeCompare(b.name, "uk");
+      });
     } else if (mode === "name-desc") {
-      visible.sort(function (a, b) { return b.name.localeCompare(a.name, "uk"); });
+      visible.sort(function (a, b) {
+        return b.name.localeCompare(a.name, "uk");
+      });
     }
 
     grid.innerHTML = "";
@@ -297,7 +315,6 @@ function initShopPage() {
   searchInput.addEventListener("input", render);
   categorySelect.addEventListener("change", render);
   sortSelect.addEventListener("change", render);
-
 
   searchInput.form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -332,15 +349,20 @@ function showProduct(product, products) {
   document.getElementById("pCategory").textContent = product.category;
   document.getElementById("pShelf").textContent = product.shelfLife;
 
-  // схожі товари
   let related = [];
   for (let i = 0; i < products.length; i++) {
-    if (products[i].id !== product.id && products[i].category === product.category) {
+    if (
+      products[i].id !== product.id &&
+      products[i].category === product.category
+    ) {
       related.push(products[i]);
     }
   }
   for (let i = 0; i < products.length; i++) {
-    if (products[i].id !== product.id && products[i].category !== product.category) {
+    if (
+      products[i].id !== product.id &&
+      products[i].category !== product.category
+    ) {
       related.push(products[i]);
     }
   }
@@ -401,7 +423,9 @@ function initProductPage() {
         tabContents[j].classList.remove("active");
       }
       tabButtons[i].classList.add("active");
-      document.getElementById("tab-" + tabButtons[i].dataset.tab).classList.add("active");
+      document
+        .getElementById("tab-" + tabButtons[i].dataset.tab)
+        .classList.add("active");
     });
   }
 
@@ -414,7 +438,8 @@ function initProductPage() {
     let message = "";
 
     if (text === "") message = "Введіть кількість від 1 до 100.";
-    else if (!Number.isInteger(number)) message = "Кількість має бути цілим числом.";
+    else if (!Number.isInteger(number))
+      message = "Кількість має бути цілим числом.";
     else if (number < 1) message = "Мінімальна кількість: 1.";
     else if (number > 100) message = "Максимальна кількість: 100.";
 
@@ -437,7 +462,7 @@ function initHomeProducts() {
   let moreButton = document.getElementById("homeMore");
 
   let products = [];
-  let shown = 0; 
+  let shown = 0;
 
   function showMore(count) {
     let end = Math.min(shown + count, products.length);
@@ -481,7 +506,6 @@ if (document.getElementById("pName")) {
   initProductPage();
 }
 
-// Кошик
 let cartItems = [];
 try {
   cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -502,7 +526,9 @@ function getCartTotal() {
 }
 
 function addToCart(product, qty) {
-  const existing = cartItems.find((item) => String(item.id) === String(product.id));
+  const existing = cartItems.find(
+    (item) => String(item.id) === String(product.id),
+  );
   if (existing) {
     existing.qty += qty;
   } else {
@@ -565,15 +591,21 @@ function renderCart() {
       createElement(
         "div",
         "cart-item-sum",
-        item.qty + " × " + formatPrice(item.price) + " = " + formatPrice(item.qty * item.price)
-      )
+        item.qty +
+          " × " +
+          formatPrice(item.price) +
+          " = " +
+          formatPrice(item.qty * item.price),
+      ),
     );
     li.append(info);
 
     const removeBtn = createElement("button", "cart-remove", "Видалити");
     removeBtn.type = "button";
     removeBtn.addEventListener("click", () => {
-      cartItems = cartItems.filter((other) => String(other.id) !== String(item.id));
+      cartItems = cartItems.filter(
+        (other) => String(other.id) !== String(item.id),
+      );
       saveCart();
       renderCart();
     });
@@ -594,7 +626,7 @@ function renderCart() {
 }
 
 function openCart() {
-    cartPayMessage.textContent = "";
+  cartPayMessage.textContent = "";
   renderCart();
   cartOverlay.classList.add("active");
 }
@@ -618,29 +650,32 @@ cartClearBtn.addEventListener("click", () => {
   renderCart();
 });
 
-document.querySelector(".single-cart-btn")?.addEventListener("click", (event) => {
-  if (!currentProduct) return;
+document
+  .querySelector(".single-cart-btn")
+  ?.addEventListener("click", (event) => {
+    if (!currentProduct) return;
 
-  const qtyInput = document.getElementById("qty");
-  const text = qtyInput.value.trim();
-  const number = Number(text);
-  const valid = text !== "" && Number.isInteger(number) && number >= 1 && number <= 100;
+    const qtyInput = document.getElementById("qty");
+    const text = qtyInput.value.trim();
+    const number = Number(text);
+    const valid =
+      text !== "" && Number.isInteger(number) && number >= 1 && number <= 100;
 
-  if (!valid) {
-    qtyInput.dispatchEvent(new Event("input"));
-    qtyInput.focus();
-    return;
-  }
+    if (!valid) {
+      qtyInput.dispatchEvent(new Event("input"));
+      qtyInput.focus();
+      return;
+    }
 
-  addToCart(currentProduct, number);
+    addToCart(currentProduct, number);
 
-  const button = event.currentTarget;
-  const oldText = button.textContent;
-  button.textContent = "Додано";
-  setTimeout(() => {
-    button.textContent = oldText;
-  }, 1200);
-});
+    const button = event.currentTarget;
+    const oldText = button.textContent;
+    button.textContent = "Додано";
+    setTimeout(() => {
+      button.textContent = oldText;
+    }, 1200);
+  });
 
 cartBuyBtn.addEventListener("click", () => {
   if (cartItems.length === 0) return;
@@ -667,28 +702,38 @@ function showFormMessage(box, text, isError) {
   box.classList.toggle("error", isError);
 }
 
-// розсилка
 const newsletterForm =
-  document.getElementById("newsletterForm") || document.querySelector(".newsletter form");
+  document.getElementById("newsletterForm") ||
+  document.querySelector(".newsletter form");
 
 if (newsletterForm) {
   const newsletterEmail = newsletterForm.querySelector("input");
-  const newsletterMessage = getFormMessage(newsletterForm, "newsletter-message");
+  const newsletterMessage = getFormMessage(
+    newsletterForm,
+    "newsletter-message",
+  );
 
   newsletterForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     if (!/^\S+@\S+\.\S+$/.test(newsletterEmail.value.trim())) {
-      showFormMessage(newsletterMessage, "Введіть коректну електронну адресу.", true);
+      showFormMessage(
+        newsletterMessage,
+        "Введіть коректну електронну адресу.",
+        true,
+      );
       return;
     }
 
-    showFormMessage(newsletterMessage, "Дякуємо! Ви підписались на розсилку.", false);
+    showFormMessage(
+      newsletterMessage,
+      "Дякуємо! Ви підписались на розсилку.",
+      false,
+    );
     newsletterForm.reset();
   });
 }
 
-// форма надіслати повідомлення
 const contactForm =
   document.getElementById("contactForm") ||
   document.querySelector("main form:not(#newsletterForm):not(#productForm)");
@@ -696,7 +741,7 @@ const contactForm =
 if (contactForm) {
   const contactMessage = getFormMessage(contactForm, "contact-message");
   const contactFields = contactForm.querySelectorAll(
-    "input:not([type=hidden]):not([type=submit]):not([type=checkbox]), textarea, select"
+    "input:not([type=hidden]):not([type=submit]):not([type=checkbox]), textarea, select",
   );
 
   contactForm.addEventListener("submit", (event) => {
@@ -717,7 +762,11 @@ if (contactForm) {
     const emailField = contactForm.querySelector("input[type=email]");
     if (emailField && !/^\S+@\S+\.\S+$/.test(emailField.value.trim())) {
       emailField.classList.add("is-invalid");
-      showFormMessage(contactMessage, "Помилка: введіть коректну електронну пошту.", true);
+      showFormMessage(
+        contactMessage,
+        "Помилка: введіть коректну електронну пошту.",
+        true,
+      );
       return;
     }
 

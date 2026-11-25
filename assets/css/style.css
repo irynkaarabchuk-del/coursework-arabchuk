@@ -7,7 +7,8 @@
   padding: 0;
   box-sizing: border-box;
 }
-html, body {
+html,
+body {
   overflow-x: clip;
 }
 body {
@@ -308,10 +309,10 @@ ul {
   justify-content: center;
 }
 .about .information-about h2 {
- text-align: center;     
-  justify-content: center;  
+  text-align: center;
+  justify-content: center;
   padding-left: 0;
-  padding-top:10px;
+  padding-top: 10px;
   padding-bottom: 10px;
 }
 .about-text {
@@ -358,13 +359,13 @@ h2 {
 }
 
 .feature-icon::before {
-  content: '';
+  content: "";
   position: absolute;
-  bottom:25px;
+  bottom: 25px;
   right: 30px;
   width: 28px;
   height: 28px;
-  background: #FFF4CD;
+  background: #fff4cd;
   border-radius: 50%;
   z-index: 0;
 }
@@ -405,7 +406,6 @@ h2 {
   color: #fff;
   font-size: 20px;
   padding-right: 0;
-
 }
 
 .shop .fa-solid {
@@ -1034,7 +1034,6 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  
 }
 
 .newsletter .newsletter-form input {
@@ -1048,7 +1047,7 @@ h2 {
   font-style: italic;
 }
 
- .newsletter-form button {
+.newsletter-form button {
   width: 120px;
   height: 50px;
   padding: 14px;
@@ -1174,27 +1173,27 @@ footer {
   font-size: 14px;
   color: #525c60;
 }
- .top-panel .search-box.is-open input[type="search"] {
-    display: block ;
-    position: fixed;
-    top: 90px;
-    left: 16px;
-    right: 16px;
-    z-index: 1000;
-    width: auto;
-    height: 50px;
-    padding: 0 20px;
-    border: 1px solid #dedddd;
-    border-radius: 30px;
-    background: #fff;
-    font-family: var(--secondary-font);
-    font-size: 16px;
-    color: var(--dark-color);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    outline: none;
-  }
+.top-panel .search-box.is-open input[type="search"] {
+  display: block;
+  position: fixed;
+  top: 90px;
+  left: 16px;
+  right: 16px;
+  z-index: 1000;
+  width: auto;
+  height: 50px;
+  padding: 0 20px;
+  border: 1px solid #dedddd;
+  border-radius: 30px;
+  background: #fff;
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  color: var(--dark-color);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
 
-  .modal-field[hidden] {
+.modal-field[hidden] {
   display: none;
 }
 
@@ -1259,7 +1258,6 @@ footer {
 .cart-pay-message:empty {
   display: none;
 }
-
 
 .social-icon {
   width: 22px;
@@ -1360,7 +1358,7 @@ footer {
 }
 
 @media (min-width: 768px) {
-   .top-panel .auth-btn {
+  .top-panel .auth-btn {
     width: 46px;
     height: 46px;
   }
@@ -1430,9 +1428,9 @@ footer {
     padding-top: 8px;
     font-size: 50px;
   }
-.main-image .subtitle {
-  font-size: 25px;
-}
+  .main-image .subtitle {
+    font-size: 25px;
+  }
   .banner {
     display: flex;
     gap: 10px;
@@ -1540,7 +1538,6 @@ footer {
     background-color: #fff;
     flex-direction: column;
     padding: 78px 65px 77px 89px;
-
   }
 
   .about-us-content h2 {
@@ -1618,7 +1615,7 @@ footer {
     display: flex;
     flex-direction: column;
   }
-  
+
   .newsletter {
     margin: 50px auto;
   }
@@ -1627,7 +1624,7 @@ footer {
   }
 
   .top-panel .search-box input[type="search"] {
-    display: block ;
+    display: block;
     flex: 1;
     min-width: 0;
     align-self: stretch;
@@ -1643,7 +1640,7 @@ footer {
   .menu-icon {
     display: none;
   }
-    .main-menu {
+  .main-menu {
     position: static;
     height: auto;
     flex-direction: row;
@@ -1652,11 +1649,11 @@ footer {
     background-color: transparent;
     gap: 15px;
   }
- 
+
   .main-menu li a {
     color: var(--dark-color);
   }
-   
+
   .main-menu li {
     margin: 0;
   }
@@ -1668,9 +1665,9 @@ footer {
     max-width: 600px;
     font-size: 60px;
   }
-.main-image .subtitle {
-  font-size: 45px;
-}
+  .main-image .subtitle {
+    font-size: 45px;
+  }
   .banner {
     display: flex;
     gap: 36px;
@@ -1729,7 +1726,7 @@ footer {
   .about .information-about h2 {
     font-size: 50px;
     width: 600px;
-    text-align: left; 
+    text-align: left;
     justify-content: flex-start;
   }
   .about .information-about .about-text {
@@ -1845,7 +1842,7 @@ footer {
     height: 723px;
     right: 260px;
   }
-    .feature-icon::before {
+  .feature-icon::before {
     right: 45px;
     top: 30px;
   }
@@ -1987,7 +1984,7 @@ footer {
     font-size: 20px;
     border-radius: 20px;
   }
-.newsletter-message {
+  .newsletter-message {
     position: absolute;
     top: 110%;
     left: 0;
@@ -2042,7 +2039,9 @@ footer {
 .animate {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .animate.visible {
@@ -2051,5 +2050,7 @@ footer {
 }
 
 .products-section.animate {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }

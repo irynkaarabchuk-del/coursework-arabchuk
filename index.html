@@ -1,5 +1,5 @@
 <!doctype html>
-    <html lang="uk">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,15 +11,16 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/shop.css" />
     <link rel="icon" type="image/png" href="assets/images/logo.svg" />
   </head>
 
   <body>
-  
-
     <header class="main-header">
       <nav class="navbar content-wrap d-flex">
         <div class="navbar-content d-flex">
@@ -53,12 +54,24 @@
           </ul>
 
           <div class="top-panel">
-           <form class="search-box" role="search" action="shop.html" method="get">
-  <input id="headerSearch" name="search" type="search" placeholder="Пошук товарів" aria-label="Пошук товарів" autocomplete="off" />
-  <button type="submit" class="search-btn" aria-label="Пошук">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-</form>
+            <form
+              class="search-box"
+              role="search"
+              action="shop.html"
+              method="get"
+            >
+              <input
+                id="headerSearch"
+                name="search"
+                type="search"
+                placeholder="Пошук товарів"
+                aria-label="Пошук товарів"
+                autocomplete="off"
+              />
+              <button type="submit" class="search-btn" aria-label="Пошук">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
             <div class="cart-box">
               <div class="cart-icon">
                 <i class="fa-solid fa-shopping-cart"></i>
@@ -70,15 +83,14 @@
       </nav>
 
       <div class="main-image content-wrap d-flex">
-        
         <p class="subtitle">100% натуральна їжа</p>
-<h1>Обери найкращий здоровіший спосіб життя</h1>
-<a href="aboutus.html" class="main-btn d-flex" id="exploreBtn">
-  <span class="btn-text">Дізнатися більше</span>
-  <span class="arrow-icon d-flex">
-    <i class="fa-solid fa-arrow-down"></i>
-  </span>
-</a>
+        <h1>Обери найкращий здоровіший спосіб життя</h1>
+        <a href="aboutus.html" class="main-btn d-flex" id="exploreBtn">
+          <span class="btn-text">Дізнатися більше</span>
+          <span class="arrow-icon d-flex">
+            <i class="fa-solid fa-arrow-down"></i>
+          </span>
+        </a>
       </div>
 
       <div class="banner">
@@ -112,7 +124,10 @@
           <ul class="list d-flex">
             <li class="feature-item">
               <div class="feature-icon">
-                <img src="assets/images/icons/organic-food.svg" alt="Органічні продукти" />
+                <img
+                  src="assets/images/icons/organic-food.svg"
+                  alt="Органічні продукти"
+                />
               </div>
               <div class="feature-text">
                 <h3>Лише органічні продукти</h3>
@@ -124,7 +139,10 @@
             </li>
             <li class="feature-item">
               <div class="feature-icon">
-                <img src="assets/images/icons/quality.svg" alt="Стандарти якості" />
+                <img
+                  src="assets/images/icons/quality.svg"
+                  alt="Стандарти якості"
+                />
               </div>
               <div class="feature-text">
                 <h3>Стандарти якості</h3>
@@ -135,7 +153,6 @@
               </div>
             </li>
           </ul>
-
 
           <a href="shop.html" class="btn-text shop d-flex">
             <span class="new-shop">Купити зараз</span>
@@ -151,52 +168,53 @@
           <p class="section-subtitle">Категорії</p>
           <h2 id="products-heading" class="section-title">Наші продукти</h2>
         </div>
-      <p class="shop-empty" id="homeStatus">Завантаження товарів…</p>
-      <div class="products" id="homeProducts"></div>
+        <p class="shop-empty" id="homeStatus">Завантаження товарів…</p>
+        <div class="products" id="homeProducts"></div>
 
-       <button type="button" class="load-more" id="homeMore" hidden> 
-        
-        Показати ще
-        <div class="arrow-icon d-flex">
-          <i class="fa-solid fa-arrow-down"></i>
-        </div>
-      </button>
+        <button type="button" class="load-more" id="homeMore" hidden>
+          Показати ще
+          <div class="arrow-icon d-flex">
+            <i class="fa-solid fa-arrow-down"></i>
+          </div>
+        </button>
       </section>
 
       <section class="testimonial">
-  <img class="side" src="assets/images/side.png" alt="" />
+        <img class="side" src="assets/images/side.png" alt="" />
 
-  <div class="customer d-flex">
-    <span class="subtitle">Відгуки</span>
-    <h2 id="testimonial-heading" class="saying">Що кажуть наші клієнти?</h2>
+        <div class="customer d-flex">
+          <span class="subtitle">Відгуки</span>
+          <h2 id="testimonial-heading" class="saying">
+            Що кажуть наші клієнти?
+          </h2>
 
-    <div class="swiper reviews-swiper" id="reviewsSwiper">
-  <div class="swiper-wrapper" id="reviewsWrapper"></div>
-  <div class="swiper-pagination"></div>
-</div>
-  </div>
+          <div class="swiper reviews-swiper" id="reviewsSwiper">
+            <div class="swiper-wrapper" id="reviewsWrapper"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
 
-  <div class="stats">
-    <div class="stat-item">
-      <span class="stat-number">100%</span>
-      <span class="stat-label">Органічні</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">285</span>
-      <span class="stat-label">Активних продуктів</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">350+</span>
-      <span class="stat-label">Органічних садів</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">25+</span>
-      <span class="stat-label">Років у фермерстві</span>
-    </div>
-  </div>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Органічні</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">285</span>
+            <span class="stat-label">Активних продуктів</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">350+</span>
+            <span class="stat-label">Органічних садів</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">25+</span>
+            <span class="stat-label">Років у фермерстві</span>
+          </div>
+        </div>
 
-  <img class="side" src="assets/images/side.png" alt="" />
-</section>
+        <img class="side" src="assets/images/side.png" alt="" />
+      </section>
 
       <section class="offer d-flex">
         <div class="content">
@@ -214,7 +232,6 @@
                 <i class="fa-solid fa-arrow-down"></i>
               </div>
             </a>
-
           </div>
 
           <div class="offer-products">
@@ -341,12 +358,12 @@
             </h2>
           </div>
           <a href="404.html" class="btn-text">
-          <button class="news d-flex">
-            Більше новин
-            <div class="arrow-icon d-flex">
-              <i class="fa-solid fa-arrow-down"></i>
-            </div>
-          </button>
+            <button class="news d-flex">
+              Більше новин
+              <div class="arrow-icon d-flex">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
+            </button>
           </a>
         </div>
 
@@ -388,8 +405,7 @@
               </p>
               <h3>Наші улюблені літні томати</h3>
               <p class="blog-text">
-                Добірка соковитих літніх томатів та ідеї, з чим їх
-                приготувати.
+                Добірка соковитих літніх томатів та ідеї, з чим їх приготувати.
               </p>
               <a href="404.html" class="btn-text read-more d-flex">
                 Читати далі
@@ -406,11 +422,21 @@
         <div class="newsletter-text">
           <h2>Підпишіться на нашу розсилку</h2>
         </div>
-      <form class="newsletter-form" id="newsletterForm" novalidate>
-  <input type="email" id="newsletterEmail" placeholder="Ваша електронна адреса" aria-label="Електронна адреса" />
-  <button type="submit">Підписатися</button>
-  <p class="newsletter-message" id="newsletterMessage" role="status" aria-live="polite"></p>
-</form>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <input
+            type="email"
+            id="newsletterEmail"
+            placeholder="Ваша електронна адреса"
+            aria-label="Електронна адреса"
+          />
+          <button type="submit">Підписатися</button>
+          <p
+            class="newsletter-message"
+            id="newsletterMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
       </section>
     </main>
 
@@ -435,20 +461,48 @@
             Свіжі органічні продукти від перевірених фермерів із доставкою до
             вашого дому.
           </p>
-        <div class="footer-socials">
-  <a href="https://www.instagram.com/?hl=uk" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-instagram"></use></svg>
-  </a>
-  <a href="https://www.facebook.com/?locale=uk_UA" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-facebook"></use></svg>
-  </a>
-  <a href="https://x.com/?lang=uk" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-twitter"></use></svg>
-  </a>
-  <a href="https://www.pinterest.com/PinterestUA/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
-    <svg class="social-icon" aria-hidden="true"><use href="assets/images/icons/sprite.svg#icon-pinterest"></use></svg>
-  </a>
-</div>
+          <div class="footer-socials">
+            <a
+              href="https://www.instagram.com/?hl=uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-instagram"></use>
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/?locale=uk_UA"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-facebook"></use>
+              </svg>
+            </a>
+            <a
+              href="https://x.com/?lang=uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-twitter"></use>
+              </svg>
+            </a>
+            <a
+              href="https://www.pinterest.com/PinterestUA/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest"
+            >
+              <svg class="social-icon" aria-hidden="true">
+                <use href="assets/images/icons/sprite.svg#icon-pinterest"></use>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div class="footer-links">
@@ -471,8 +525,8 @@
         </p>
       </div>
     </footer>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script type="module" src="assets/js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
   </body>
 </html>

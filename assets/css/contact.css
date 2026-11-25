@@ -116,7 +116,6 @@
   border-radius: 50%;
   background: #eff6f1;
   color: var(--dark-color);
-
 }
 
 .contact-socials .social-icon {
@@ -182,11 +181,10 @@
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 14px;
-
 }
 
-.contact-icon  {
-   width: 24px;
+.contact-icon {
+  width: 24px;
   height: 24px;
   object-fit: contain;
   flex-shrink: 0;
@@ -267,7 +265,6 @@
   cursor: pointer;
 }
 
-
 @media (min-width: 768px) {
   .contact-banner img {
     height: 220px;
@@ -320,7 +317,7 @@
   }
 }
 
- @media (min-width: 1200px) {
+@media (min-width: 1200px) {
   .contact-banner img {
     height: auto;
   }
@@ -330,17 +327,17 @@
   }
 
   .contact-info {
-    max-width: 1220px; 
+    max-width: 1220px;
     grid-template-columns: minmax(0, 624px) 1fr;
     gap: 60px;
     padding: 120px 20px 100px;
   }
 
- .contact-info-img img {
-  width: 100%;
-  max-width: 624px;
-  height: 640px;
-}
+  .contact-info-img img {
+    width: 100%;
+    max-width: 624px;
+    height: 640px;
+  }
 
   .contact-heading {
     font-size: 36px;

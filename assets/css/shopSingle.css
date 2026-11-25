@@ -1,4 +1,3 @@
-
 .single-product {
   display: flex;
   flex-direction: column;
@@ -99,7 +98,6 @@
 .single-cart-btn .arrow-icon {
   transform: none;
 }
-
 
 .single-cart-btn .new-shop {
   padding-right: 22px;
@@ -230,7 +228,7 @@
     margin-bottom: 40px;
   }
 
-      .btn.shop {
+  .btn.shop {
     height: 80px;
   }
 }

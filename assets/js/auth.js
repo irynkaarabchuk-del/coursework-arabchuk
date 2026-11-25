@@ -45,7 +45,7 @@ function initAuth() {
   const submitBtn = $("authSubmit");
 
 
-  // іконка в шапці
+
   const authBtn = document.createElement("button");
   authBtn.type = "button";
   authBtn.className = "auth-btn";
@@ -141,7 +141,6 @@ function initAuth() {
     if (e.key === "Escape") closeModal();
   });
 
-  //увійти або вийти
   let loggedIn = false;
   authBtn.addEventListener("click", async () => {
     if (!loggedIn) return openModal();
@@ -156,7 +155,7 @@ function initAuth() {
     authBtn.setAttribute("aria-label", loggedIn ? "Вийти" : "Увійти");
     authBtn.title = loggedIn ? "Вийти (" + session.user.email + ")" : "Увійти";
   }
-   // посилання на адмін-панель
+  
   async function updateAdminLink(session) {
     let isAdmin = false;
 

@@ -152,7 +152,6 @@ function initAdminPage() {
     }
   }
 
-  // заповнюємо форму даними товару для редагування
   function startEdit(product) {
     document.getElementById("productId").value = product.id;
     document.getElementById("fName").value = product.name;
@@ -181,7 +180,6 @@ function initAdminPage() {
     cancelBtn.hidden = true;
   }
 
-  // збираємо дані з форми в обʼєкт для бази
   function readForm() {
     const value = (id) => document.getElementById(id).value.trim();
     const oldPrice = value("fOldPrice");
@@ -219,7 +217,6 @@ function initAdminPage() {
     return result;
   }
   
-  // CREATE і UPDATE
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -253,7 +250,6 @@ function initAdminPage() {
     }
   });
 
-  // DELETE
     async function deleteProduct(product) {
     if (!confirm("Видалити товар «" + product.name + "»?")) return;
 
@@ -268,8 +264,6 @@ function initAdminPage() {
     }
   }
 
-
-  // перевіряємо доступ при відкритті сторінки, вході та виході
   db.auth.onAuthStateChange((event, session) => {
     if (event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "SIGNED_OUT") {
       setTimeout(() => checkAccess(session), 0);
